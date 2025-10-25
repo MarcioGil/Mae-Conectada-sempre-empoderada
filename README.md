@@ -8,7 +8,18 @@
 
 ---
 
-## 👨‍💻 **Sobre o Desenvolvedor**
+## � Resumo Rápido (versão compacta)
+
+Uma plataforma PWA focada em empoderar mães com acessibilidade, comunidade e recursos práticos. Principais pontos em 3 linhas:
+
+- Assistente de voz otimizada (PT-BR) e acessibilidade para PCDs
+- Módulos educacionais, centro de documentos e chat comunitário moderado
+- Sistema de emergência com envio de localização e contatos — backend planejado para funcionalidades avançadas
+
+Leia a versão completa abaixo; várias seções grandes estão dobráveis para leitura rápida.
+
+
+## �👨‍💻 **Sobre o Desenvolvedor**
 
 <div align="center">
 
@@ -176,7 +187,7 @@ npm run dev
 | **Acessibilidade** | ARIA, WCAG 2.1 AA, Screen Readers | Inclusão total, conformidade legal |
 | **Voice AI** | Web Speech API, Whisper STT, TTS | Assistente de voz natural |
 | **IA & ML** | OpenAI GPT, Custom NLP, scikit-learn | Análise inteligente, matching personalizado |
-| **Backend** | Node.js, Express, GraphQL | Escalabilidade, performance |
+| **Backend (planejado)** | Node.js, Express, GraphQL (implementação planejada) | Escalabilidade, performance (implementação futura) |
 | **Database** | PostgreSQL, Redis, ElasticSearch | Confiabilidade, cache, busca inteligente |
 | **Segurança** | JWT + OAuth, AES256, LGPD Compliance | Proteção de dados sensíveis |
 | **DevOps** | Docker, Vercel, GitHub Actions | Deploy contínuo, escalabilidade |
@@ -204,9 +215,9 @@ npm run dev
 
 ---
 
-## 📊 **Métricas e Performance**
+## 📊 **Métricas e Performance (benchmarks & estimativas)**
 
-### **Benchmarks Técnicos**
+### **Benchmarks Técnicos (laboratório / estimativa)**
 ```
 Lighthouse Score:    96/100 📊
 First Paint:         1.2s ⚡
@@ -217,11 +228,14 @@ SEO Score:          95/100 🔍
 PWA Score:          100/100 📱
 ```
 
-### **Impacto Social Projetado**
-- 🎯 **10K+ mães** alcançadas no primeiro ano
-- 💰 **R$ 50M+** em benefícios desbloqueados
-- 🏆 **85%** taxa de sucesso em solicitações
-- ⏰ **70%** redução no tempo de processos
+> Nota: os números acima são benchmarks de laboratório e estimativas; métricas reais de uso serão coletadas e publicadas a partir da instrumentação em produção.
+
+### **Estimativas de Impacto Social**
+Os resultados abaixo são estimativas de impacto projetadas — valores reais serão validados em campo com dados anônimos e consentidos:
+- 🎯 **~10K** mães alcançadas no primeiro ano (estimativa)
+- 💰 **~R$ 50M** em benefícios potencialmente desbloqueados (estimativa)
+- 🏆 **~85%** taxa de sucesso prevista em solicitações (estimativa)
+- ⏰ **~70%** redução no tempo de processos (estimativa)
 
 ---
 
@@ -328,11 +342,12 @@ Demo Mobile:     Repositório:
 - ✅ Sistema de acessibilidade
 - ✅ Design responsivo
 
-### **🚀 Fase 2 - Backend & IA**
-- 🔄 API GraphQL completa
-- 🔄 Sistema de autenticação
-- 🔄 Integração com OpenAI
-- 🔄 Database PostgreSQL
+### **🚀 Fase 2 - Backend & IA (planejado / por implementar)**
+> Observação: os itens abaixo são parte do roadmap e representam trabalho planejado — código do backend e integrações avançadas ainda serão entregues.
+- 🔄 API GraphQL completa (planejado)
+- 🔄 Sistema de autenticação (planejado)
+- 🔄 Integração com OpenAI (planejada)
+- 🔄 Database PostgreSQL (planejado)
 
 ### **💎 Fase 3 - Módulos Principais**
 - 📅 Direitos Sem Medo (BPC)
@@ -408,7 +423,7 @@ gh pr create --title "Nova funcionalidade incrível"
 ### **Para Recrutadores**
 📄 **CV Completo**: [Download PDF](https://maeconecta.com.br/cv-marcio-gil.pdf)  
 💼 **Portfolio Técnico**: Mais projetos no GitHub  
-🎯 **Disponibilidade**: Imediata para oportunidades senior/tech lead  
+🎯 **Disponibilidade**: Pleno forte / Fullstack em evolução — aberto(a) a oportunidades para liderar features de produto social e crescimento técnico  
 
 ---
 

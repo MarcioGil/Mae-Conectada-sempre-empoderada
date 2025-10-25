@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import SimpleVoiceButton from '../components/SimpleVoiceButton'
-import PortugueseVoiceAssistant from '../components/PortugueseVoiceAssistant'
 import EmergencySystem from '../components/EmergencySystem'
 import DocumentCenter from '../components/DocumentCenter'
 import EducationalResources from '../components/EducationalResources'
@@ -118,7 +117,7 @@ export default function RootLayout({
             
             {/* Assistente de Voz Clara - 100% em Português */}
             <div className="fixed bottom-4 right-4 z-50 max-w-sm">
-              <PortugueseVoiceAssistant />
+              <SimpleVoiceButton />
             </div>
           </div>
           

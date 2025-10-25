@@ -12,6 +12,7 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isSupported, setIsSupported] = useState(false)
   const [lastCommand, setLastCommand] = useState('')
+  const [timeoutId, setTimeoutId] = useState<number | null>(null)
   const recognitionRef = useRef<any>(null)
 
   useEffect(() => {
@@ -35,10 +36,20 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
       utterance.pitch = VOICE_CONFIG.PITCH
       utterance.volume = VOICE_CONFIG.VOLUME
       
-      // Tentar usar a melhor voz em português
-      const bestVoice = getBestPortugueseVoice()
-      if (bestVoice) {
-        utterance.voice = bestVoice
+      // Aguardar vozes carregarem antes de selecionar
+      const selectVoice = () => {
+        const bestVoice = getBestPortugueseVoice()
+        if (bestVoice) {
+          utterance.voice = bestVoice
+        }
+      }
+      
+      // Se vozes já estão carregadas
+      if (window.speechSynthesis.getVoices().length > 0) {
+        selectVoice()
+      } else {
+        // Aguardar vozes carregarem
+        window.speechSynthesis.addEventListener('voiceschanged', selectVoice, { once: true })
       }
       
       utterance.onstart = () => setIsSpeaking(true)
@@ -66,9 +77,23 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
       recognitionRef.current.onstart = () => {
         setIsListening(true)
         speak(MESSAGES.CLARA.LISTENING)
+        
+        // Timeout de segurança - para após 10 segundos
+        const id = window.setTimeout(() => {
+          if (recognitionRef.current && isListening) {
+            recognitionRef.current.stop()
+            setIsListening(false)
+            speak('Não consegui ouvir nada. Tente novamente!')
+          }
+        }, 10000)
+        setTimeoutId(id)
       }
 
       recognitionRef.current.onresult = (event: any) => {
+        if (timeoutId) {
+          window.clearTimeout(timeoutId)
+          setTimeoutId(null)
+        }
         const command = event.results[0][0].transcript.toLowerCase()
         setLastCommand(command)
         handleCommand(command)
@@ -76,10 +101,18 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
 
       recognitionRef.current.onend = () => {
         setIsListening(false)
+        if (timeoutId) {
+          window.clearTimeout(timeoutId)
+          setTimeoutId(null)
+        }
       }
 
       recognitionRef.current.onerror = () => {
         setIsListening(false)
+        if (timeoutId) {
+          window.clearTimeout(timeoutId)
+          setTimeoutId(null)
+        }
         speak(MESSAGES.CLARA.ERROR_RECOGNITION)
       }
 
@@ -88,6 +121,10 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
       } catch (error) {
         console.error('Erro ao iniciar reconhecimento:', error)
         setIsListening(false)
+        if (timeoutId) {
+          window.clearTimeout(timeoutId)
+          setTimeoutId(null)
+        }
         speak(MESSAGES.CLARA.ERROR_RECOGNITION)
       }
     }

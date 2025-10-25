@@ -78,7 +78,11 @@ export const MESSAGES = {
     TRUST_YOURSELF: 'Confie na sua intuição, querida. Se algo não está certo, você tem razão em se preocupar.',
     EMERGENCY_READY: 'Se precisar de ajuda urgente, só me chamar. Tenho contatos de emergência prontos para você.',
     LEGAL_RIGHTS: 'Você tem direitos legais que te protegem. Vou te explicar cada um deles com carinho.',
-    EMOTIONAL_SAFETY: 'Seus sentimentos são válidos. É normal sentir medo, raiva ou tristeza em situações difíceis.'
+    EMOTIONAL_SAFETY: 'Seus sentimentos são válidos. É normal sentir medo, raiva ou tristeza em situações difíceis.',
+    IMMEDIATE_DANGER: 'Querida, se você está em perigo agora, ligue imediatamente para 190 ou 180. Sua segurança é prioridade número um.',
+    EMERGENCY_ACTIVATION: 'Acionando sistema de emergência com localização GPS e contatos automáticos. Sua segurança é prioridade absoluta.',
+    VIOLENCE_IN_PROGRESS: 'Emergência detectada. Acionando polícia imediatamente. Procure lugar seguro se possível.',
+    HELP_ON_WAY: 'Alerta de emergência enviado com sua localização. Ajuda está a caminho. Mantenha-se segura.'
   },
 
   // Frases de empoderamento com segurança

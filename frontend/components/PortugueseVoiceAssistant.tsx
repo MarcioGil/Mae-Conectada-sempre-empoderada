@@ -274,6 +274,34 @@ export default function PortugueseVoiceAssistant({ className = '' }: PortugueseV
       return
     }
     
+    // Situações de emergência extrema
+    if (cmd.includes('estou em perigo') || cmd.includes('preciso de ajuda urgente') || cmd.includes('estou com medo') || cmd.includes('emergência')) {
+      falarPortugues('Estou acionando o sistema de emergência para você agora mesmo. Você não está sozinha, ajuda está a caminho. Mantenha-se segura.')
+      setTimeout(() => window.location.href = '/emergencia', 1000)
+      return
+    }
+    
+    // Comandos para sistema de emergência
+    if (cmd.includes('botão de pânico') || cmd.includes('alerta de emergência') || cmd.includes('ligar para polícia') || cmd.includes('chamar socorro')) {
+      falarPortugues('Abrindo o sistema de emergência com localização GPS e contatos automáticos. Sua segurança é prioridade absoluta.')
+      setTimeout(() => window.location.href = '/emergencia', 1500)
+      return
+    }
+    
+    // Violência em curso
+    if (cmd.includes('ele está aqui') || cmd.includes('estou sendo agredida') || cmd.includes('socorro') || cmd.includes('ajuda')) {
+      falarPortugues('Acionando emergência imediatamente. Polícia sendo contactada.')
+      // Ativar emergência diretamente
+      setTimeout(() => {
+        window.location.href = '/emergencia'
+        // Tentar acionar emergência automaticamente
+        setTimeout(() => {
+          window.open('tel:190', '_self')
+        }, 2000)
+      }, 500)
+      return
+    }
+    
     // Dúvidas sobre direitos
     if (cmd.includes('tenho direito') || cmd.includes('posso pedir') || cmd.includes('benefício') || cmd.includes('auxílio')) {
       falarPortugues('Claro que você tem direitos, amor! Você merece todo o apoio que existe. Vou te mostrar tudinho que você pode acessar. Conhecer seus direitos é o primeiro passo para conquistar uma vida melhor.')

@@ -133,116 +133,134 @@ export default function PortugueseVoiceAssistant({ className = '' }: PortugueseV
     console.log('Comando recebido:', comando)
     const cmd = comando.toLowerCase().trim()
     
-    // Saudações e cumprimentos
+    // Saudações e cumprimentos - mais carinhosas
     if (cmd.includes('olá clara') || cmd.includes('oi clara') || cmd.includes('ei clara')) {
-      falarPortugues('Olá! Sou Clara, sua assistente virtual. Como posso ajudar você hoje?')
+      falarPortugues('Oi, querida! Sou a Clara, e estou aqui para te acompanhar nessa jornada. Como posso te ajudar hoje?')
       return
     }
     
-    if (cmd.includes('bom dia clara')) {
-      falarPortugues('Bom dia! Estou aqui para te apoiar. O que você precisa?')
+    if (cmd.includes('bom dia clara') || cmd.includes('bom dia')) {
+      falarPortugues('Bom dia, minha querida! Que seu dia seja repleto de conquistas. Como posso te ajudar?')
       return
     }
     
-    if (cmd.includes('boa tarde clara')) {
-      falarPortugues('Boa tarde! Como posso ser útil para você?')
+    if (cmd.includes('boa tarde clara') || cmd.includes('boa tarde')) {
+      falarPortugues('Boa tarde, amor! Espero que esteja tudo bem com você. O que precisa hoje?')
       return
     }
     
-    if (cmd.includes('boa noite clara')) {
-      falarPortugues('Boa noite! Em que posso ajudar?')
+    if (cmd.includes('boa noite clara') || cmd.includes('boa noite')) {
+      falarPortugues('Boa noite, querida! Está na hora de cuidar de você também. Como posso ajudar?')
       return
     }
     
-    // Despedidas
+    // Despedidas - carinhosas
     if (cmd.includes('tchau') || cmd.includes('até logo') || cmd.includes('parar')) {
-      falarPortugues('Até logo! Estarei aqui quando você precisar. Cuide-se bem!')
+      falarPortugues('Até logo, minha linda! Lembra que você é forte e não está sozinha. Cuide-se com carinho!')
       return
     }
     
-    // Agradecimentos
+    // Agradecimentos - encorajadoras
     if (cmd.includes('obrigada') || cmd.includes('obrigado') || cmd.includes('valeu')) {
-      falarPortugues('De nada! Fico feliz em ajudar. Conte comigo sempre!')
+      falarPortugues('Imagina, querida! É um prazer te ajudar. Você merece todo o apoio do mundo!')
       return
     }
     
-    // Navegação - Direitos
+    // Navegação - Direitos (encorajadora)
     if (cmd.includes('direito') || cmd.includes('benefício') || cmd.includes('auxílio') || cmd.includes('bpc')) {
-      falarPortugues('Abrindo seus direitos e benefícios. Vou mostrar tudo que você tem direito.')
+      falarPortugues('Vou te mostrar todos os seus direitos, porque você merece saber tudo que tem direito. Vamos lá!')
       setTimeout(() => window.location.href = '/direitos', 1500)
       return
     }
     
-    // Navegação - Trabalho
+    // Navegação - Trabalho (motivadora)
     if (cmd.includes('trabalho') || cmd.includes('emprego') || cmd.includes('vaga') || cmd.includes('renda')) {
-      falarPortugues('Procurando oportunidades de trabalho e renda para você.')
+      falarPortugues('Que bom que você está buscando oportunidades! Vou te ajudar a encontrar trabalho. Você tem muito valor!')
       setTimeout(() => window.location.href = '/trabalho', 1500)
       return
     }
     
-    // Navegação - Cursos
+    // Navegação - Cursos (incentivadora)
     if (cmd.includes('curso') || cmd.includes('estudo') || cmd.includes('aprender') || cmd.includes('capacitação')) {
-      falarPortugues('Mostrando cursos e capacitações disponíveis para você.')
+      falarPortugues('Que orgulho! Você quer aprender e crescer. Vou mostrar cursos incríveis para você!')
       setTimeout(() => window.location.href = '/cursos', 1500)
       return
     }
     
-    // Navegação - Documentos
+    // Navegação - Documentos (prestativa)
     if (cmd.includes('documento') || cmd.includes('papel') || cmd.includes('arquivo') || cmd.includes('carteira')) {
-      falarPortugues('Abrindo seu centro de documentos. Vamos organizar seus papéis.')
+      falarPortugues('Vamos organizar seus documentos juntas. Isso vai facilitar muito sua vida!')
       setTimeout(() => window.location.href = '/documentos', 1500)
       return
     }
     
-    // Emergência
+    // Emergência - acolhedora mas eficaz
     if (cmd.includes('emergência') || cmd.includes('socorro') || cmd.includes('ajuda urgente') || cmd.includes('perigo')) {
-      falarPortugues('Ativando sistema de emergência. Você não está sozinha.')
+      falarPortugues('Entendi que você precisa de ajuda urgente. Você é corajosa. Vou ativar tudo para te proteger!')
       setTimeout(() => window.location.href = '/emergencia', 1500)
       return
     }
     
-    // Proteção
+    // Proteção - solidária
     if (cmd.includes('proteção') || cmd.includes('violência') || cmd.includes('agressão') || cmd.includes('segurança')) {
-      falarPortugues('Abrindo recursos de proteção e segurança. Estamos aqui para te proteger.')
+      falarPortugues('Sua segurança é prioridade. Vou te mostrar todas as formas de proteção. Você não está sozinha!')
       setTimeout(() => window.location.href = '/protecao', 1500)
       return
     }
     
-    // Comunidade
+    // Comunidade - animadora
     if (cmd.includes('comunidade') || cmd.includes('grupo') || cmd.includes('outras mães') || cmd.includes('conversar')) {
-      falarPortugues('Conectando você com a comunidade de mães. Vamos conversar!')
+      falarPortugues('Que alegria! Vou te conectar com outras mães incríveis como você. Juntas somos mais fortes!')
       setTimeout(() => window.location.href = '/comunidade', 1500)
       return
     }
     
-    // WhatsApp
+    // WhatsApp - empolgada
     if (cmd.includes('whatsapp') || cmd.includes('zap') || cmd.includes('grupo whatsapp')) {
-      falarPortugues('Vou te ajudar a criar ou entrar em grupos do WhatsApp.')
+      falarPortugues('Vou te ajudar a criar grupos no WhatsApp para você conversar com outras mães. Que legal!')
       setTimeout(() => window.location.href = '/whatsapp', 1500)
       return
     }
     
-    // Início
+    // Início - acolhedora
     if (cmd.includes('início') || cmd.includes('home') || cmd.includes('principal') || cmd.includes('voltar')) {
-      falarPortugues('Voltando para a página inicial. Bem-vinda de volta!')
+      falarPortugues('Voltando para casa! Sua base segura está aqui. Bem-vinda de volta, querida!')
       setTimeout(() => window.location.href = '/', 1500)
       return
     }
     
-    // Ajuda
+    // Ajuda - prestativa e detalhada
     if (cmd.includes('ajuda') || cmd.includes('como usar') || cmd.includes('tutorial') || cmd.includes('o que fazer')) {
-      falarPortugues('Posso te ajudar com direitos, trabalho, cursos, documentos, emergência, proteção e comunidade. Diga o que você precisa!')
+      falarPortugues('Posso te ajudar com direitos, trabalho, cursos, documentos, emergência, proteção e comunidade. Me diz o que você está precisando!')
       return
     }
     
-    // Status da Clara
-    if (cmd.includes('como você está') || cmd.includes('tudo bem')) {
-      falarPortugues('Estou bem e pronta para te ajudar! E você, como está?')
+    // Estado emocional - apoio
+    if (cmd.includes('como você está') || cmd.includes('tudo bem') || cmd.includes('como está')) {
+      falarPortugues('Estou ótima e pronta para te ajudar! E você, querida, como está se sentindo? Lembra que é normal ter dias difíceis.')
       return
     }
     
-    // Comando não reconhecido
-    falarPortugues('Não entendi esse comando. Você pode dizer: direitos, trabalho, cursos, documentos, emergência, proteção, comunidade ou ajuda.')
+    // Tristeza/Dificuldade - apoio emocional
+    if (cmd.includes('triste') || cmd.includes('difícil') || cmd.includes('cansada') || cmd.includes('sozinha')) {
+      falarPortugues('Percebo que você está passando por um momento difícil. Respira fundo, minha querida. Você é mais forte do que imagina e não está sozinha.')
+      return
+    }
+    
+    // Medo/Ansiedade - tranquilizante
+    if (cmd.includes('medo') || cmd.includes('ansiosa') || cmd.includes('preocupada') || cmd.includes('nervosa')) {
+      falarPortugues('Entendo que você está sentindo medo ou ansiedade. É normal, amor. Vamos respirar juntas e lembrar que você já superou tantas coisas!')
+      return
+    }
+    
+    // Autoestima - encorajadora
+    if (cmd.includes('não consigo') || cmd.includes('incapaz') || cmd.includes('não sei') || cmd.includes('burra')) {
+      falarPortugues('Ei, para com isso! Você é incrível e capaz de muito mais do que imagina. Cada passo que você dá é uma vitória, guerreira!')
+      return
+    }
+    
+    // Comando não reconhecido - carinhoso
+    falarPortugues('Não entendi direito, amor. Pode tentar dizer: direitos, trabalho, cursos, documentos, emergência, proteção ou comunidade? Estou aqui para você!')
   }
 
   // Função principal para alternar voz
@@ -338,19 +356,22 @@ export default function PortugueseVoiceAssistant({ className = '' }: PortugueseV
         )}
       </button>
 
-      {/* Dicas de uso */}
+      {/* Dicas de uso - mais carinhosas */}
       <div className="mt-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
-        <p className="text-xs font-semibold text-purple-800 mb-2">💡 Experimente dizer:</p>
+        <p className="text-xs font-semibold text-purple-800 mb-2">� Pode me chamar assim, querida:</p>
         <div className="grid grid-cols-2 gap-1 text-xs text-purple-700">
-          <span>• "Olá Clara"</span>
+          <span>• "Oi Clara"</span>
           <span>• "Meus direitos"</span>
-          <span>• "Trabalho"</span>
-          <span>• "Cursos"</span>
-          <span>• "Emergência"</span>
-          <span>• "Proteção"</span>
-          <span>• "Comunidade"</span>
-          <span>• "Ajuda"</span>
+          <span>• "Preciso trabalhar"</span>
+          <span>• "Quero estudar"</span>
+          <span>• "Socorro Clara"</span>
+          <span>• "Me protege"</span>
+          <span>• "Outras mães"</span>
+          <span>• "Estou triste"</span>
         </div>
+        <p className="text-xs text-purple-600 mt-2 italic">
+          💭 Lembre-se: você pode falar naturalmente comigo, como se fosse uma amiga!
+        </p>
       </div>
     </div>
   )

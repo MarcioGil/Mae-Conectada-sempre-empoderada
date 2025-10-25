@@ -3,64 +3,80 @@ export const PORTUGUESE_LOCALE = 'pt-BR'
 
 // Mensagens em português brasileiro
 export const MESSAGES = {
-  // Assistente Clara
+  // Assistente Clara - Tons mais acolhedores e carinhosos
   CLARA: {
-    GREETING: 'Olá! Sou Clara, sua assistente virtual. Como posso ajudar você hoje?',
-    GREETING_SHORT: 'Oi! Estou aqui para te apoiar. Em que posso ser útil?',
-    LISTENING: 'Estou ouvindo...',
-    SPEAKING: 'Clara está falando...',
-    ERROR_RECOGNITION: 'Não consegui entender. Tente falar mais claramente.',
-    ERROR_SYNTHESIS: 'Erro na síntese de voz. Tente novamente.',
-    NOT_SUPPORTED: 'Seu navegador não suporta reconhecimento de voz. Use Chrome ou Safari.',
-    COMMANDS_HELP: 'Você pode dizer: direitos, trabalho, cursos, emergência, documentos ou ajuda.',
-    GOODBYE: 'Até logo! Estarei aqui quando precisar. Cuide-se!',
-    THANKS_RESPONSE: 'De nada! Estou sempre aqui para você. Precisando, é só chamar!',
-    NOT_UNDERSTOOD: 'Desculpe, não entendi. Tente dizer "ajuda" para ver o que posso fazer.'
+    GREETING: 'Oi, querida! Sou a Clara, e estou aqui para te acompanhar nessa jornada. Como posso te ajudar hoje?',
+    GREETING_SHORT: 'Olá, linda! Pode contar comigo. Em que posso te apoiar?',
+    GREETING_MORNING: 'Bom dia, minha querida! Que seu dia seja repleto de conquistas. Como posso te ajudar?',
+    GREETING_AFTERNOON: 'Boa tarde, amor! Espero que esteja tudo bem com você. O que precisa hoje?',
+    GREETING_EVENING: 'Boa noite, querida! Está na hora de cuidar de você também. Como posso ajudar?',
+    LISTENING: 'Estou aqui, te ouvindo com todo carinho...',
+    SPEAKING: 'Clara está conversando com você...',
+    ERROR_RECOGNITION: 'Desculpa, amor, não consegui entender bem. Pode repetir com calma?',
+    ERROR_SYNTHESIS: 'Ops, tive um probleminha para falar. Tenta de novo, querida?',
+    NOT_SUPPORTED: 'Querida, seu navegador não consegue me ouvir. Tenta usar o Chrome ou Safari, tá?',
+    COMMANDS_HELP: 'Posso te ajudar com direitos, trabalho, cursos, emergência, documentos, proteção e muito mais. Me diz o que você está precisando!',
+    GOODBYE: 'Até logo, minha linda! Lembra que você é forte e não está sozinha. Cuide-se com carinho!',
+    THANKS_RESPONSE: 'Imagina, querida! É um prazer te ajudar. Você merece todo o apoio do mundo!',
+    NOT_UNDERSTOOD: 'Não entendi direito, amor. Pode tentar dizer: direitos, trabalho, cursos, emergência, proteção ou ajuda? Estou aqui para você!',
+    ENCOURAGEMENT: 'Você é incrível e mais forte do que imagina! Estou aqui para te apoiar sempre.',
+    COMFORT: 'Respira fundo, querida. Você não está sozinha. Vamos passar por isso juntas!',
+    EMPOWERMENT: 'Cada passo que você dá é uma vitória! Continue seguindo em frente, guerreira!'
   },
 
-  // Navegação e Comandos
+  // Navegação - Tons acolhedores
   NAVIGATION: {
-    GOING_TO_RIGHTS: 'Abrindo seus direitos e benefícios.',
-    GOING_TO_WORK: 'Buscando oportunidades de trabalho para você.',
-    GOING_TO_COURSES: 'Mostrando cursos e capacitações disponíveis.',
-    GOING_TO_DOCUMENTS: 'Abrindo centro de documentos.',
-    GOING_TO_EMERGENCY: 'Ativando sistema de emergência.',
-    GOING_TO_PROTECTION: 'Abrindo proteção contra violência.',
-    GOING_TO_COMMUNITY: 'Conectando você à comunidade.',
-    GOING_TO_HOME: 'Voltando à página inicial. Bem-vinda de volta!'
+    GOING_TO_RIGHTS: 'Vou te mostrar todos os seus direitos, porque você merece saber tudo que tem direito. Vamos lá!',
+    GOING_TO_WORK: 'Que bom que você está buscando oportunidades! Vou te ajudar a encontrar trabalho. Você tem muito valor!',
+    GOING_TO_COURSES: 'Que orgulho! Você quer aprender e crescer. Vou mostrar cursos incríveis para você!',
+    GOING_TO_DOCUMENTS: 'Vamos organizar seus documentos juntas. Isso vai facilitar muito sua vida!',
+    GOING_TO_EMERGENCY: 'Entendi que você precisa de ajuda urgente. Você é corajosa. Vou ativar tudo para te proteger!',
+    GOING_TO_PROTECTION: 'Sua segurança é prioridade. Vou te mostrar todas as formas de proteção. Você não está sozinha!',
+    GOING_TO_COMMUNITY: 'Que alegria! Vou te conectar com outras mães incríveis como você. Juntas somos mais fortes!',
+    GOING_TO_HOME: 'Voltando para casa! Sua base segura está aqui. Bem-vinda de volta, querida!'
   },
 
-  // Sistema de Emergência
+  // Sistema de Emergência - Tranquilizante mas eficaz
   EMERGENCY: {
-    ACTIVATED: 'Sistema de emergência ativado. Você está segura.',
-    LOCATION_SENT: 'Localização enviada para contatos de emergência.',
-    HELP_CALLED: 'Ajuda está sendo chamada. Mantenha-se segura.',
-    SILENT_MODE: 'Modo silencioso ativado. Sistema funcionando discretamente.'
+    ACTIVATED: 'Sistema ativado, minha querida. Você está segura agora. Respira fundo, vai dar tudo certo.',
+    LOCATION_SENT: 'Sua localização foi enviada para pessoas que podem te ajudar. Você foi muito corajosa!',
+    HELP_CALLED: 'Ajuda está vindo, amor. Mantenha-se forte. Você não está sozinha nessa.',
+    SILENT_MODE: 'Modo silencioso ativado. Estou te protegendo discretamente. Você está segura.'
   },
 
-  // Botões e Interface
+  // Botões e Interface - Linguagem carinhosa
   UI: {
-    START_LISTENING: 'Começar a ouvir',
-    STOP_LISTENING: 'Parar de ouvir',
-    START_SPEAKING: 'Falar com Clara',
-    STOP_SPEAKING: 'Parar de falar',
-    ACTIVATE_EMERGENCY: 'Ativar Emergência',
-    CREATE_WHATSAPP_GROUP: 'Criar Grupo WhatsApp',
-    OPEN_DOCUMENTS: 'Abrir Documentos',
-    LEARN_RIGHTS: 'Aprender Direitos',
-    GET_HELP: 'Obter Ajuda'
+    START_LISTENING: 'Conversar com Clara',
+    STOP_LISTENING: 'Pausar conversa',
+    START_SPEAKING: 'Falar com a Clara',
+    STOP_SPEAKING: 'Clara, para um pouquinho',
+    ACTIVATE_EMERGENCY: 'Preciso de Ajuda Urgente',
+    CREATE_WHATSAPP_GROUP: 'Criar Grupo no WhatsApp',
+    OPEN_DOCUMENTS: 'Ver Meus Documentos',
+    LEARN_RIGHTS: 'Conhecer Meus Direitos',
+    GET_HELP: 'Como Usar a Plataforma'
   },
 
   // Status e Feedback
   STATUS: {
-    MICROPHONE_ON: 'Microfone ligado',
-    MICROPHONE_OFF: 'Microfone desligado',
-    SPEAKING: 'Falando...',
-    LISTENING: 'Ouvindo...',
-    PROCESSING: 'Processando...',
-    ERROR: 'Erro',
-    SUCCESS: 'Sucesso',
-    LOADING: 'Carregando...'
+    MICROPHONE_ON: 'Clara está ouvindo',
+    MICROPHONE_OFF: 'Clara em pausa',
+    SPEAKING: 'Clara conversando...',
+    LISTENING: 'Clara ouvindo você...',
+    PROCESSING: 'Clara pensando...',
+    ERROR: 'Ops, algo deu errado',
+    SUCCESS: 'Perfeito!',
+    LOADING: 'Carregando com carinho...'
+  },
+
+  // Mensagens de apoio emocional
+  EMOTIONAL_SUPPORT: {
+    STRESS: 'Percebo que você pode estar estressada. Que tal respirar fundo? Você está indo muito bem!',
+    ENCOURAGEMENT: 'Você é uma guerreira! Cada dia que passa você fica mais forte.',
+    CONFIDENCE: 'Confie em você, querida. Você tem tudo que precisa para vencer!',
+    HOPE: 'Dias difíceis passam, mas sua força permanece. Continue acreditando!',
+    STRENGTH: 'Você já superou tantas coisas! Esta também vai passar.',
+    GRATITUDE: 'Que alegria poder te acompanhar nessa jornada. Você é especial!'
   },
 
   // Categorias e Seções

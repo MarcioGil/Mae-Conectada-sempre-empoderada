@@ -19,7 +19,8 @@ Uma plataforma PWA focada em empoderar mães com acessibilidade, comunidade e re
 Leia a versão completa abaixo; várias seções grandes estão dobráveis para leitura rápida.
 
 
-## �👨‍💻 **Sobre o Desenvolvedor**
+<details>
+<summary><h2>�‍💻 <strong>Sobre o Desenvolvedor</strong> (clique para expandir)</h2></summary>
 
 <div align="center">
 
@@ -40,6 +41,8 @@ Leia a versão completa abaixo; várias seções grandes estão dobráveis para 
 
 </div>
 
+</details>
+
 ---
 
 ## 🚀 **Visão Geral do Projeto**
@@ -55,7 +58,8 @@ O **Mãe Conecta** é uma **plataforma revolucionária** que transforma burocrac
 ### 💡 **Nossa Solução**
 Uma plataforma que **elimina barreiras** e **conecta mães** aos seus direitos, oportunidades e comunidade através de:
 
-## � **Módulos Revolucionários**
+<details>
+<summary><h2>🧩 <strong>Módulos Revolucionários</strong> (clique para expandir)</h2></summary>
 
 ### �🎙 **Assistente Clara de Voz**
 *"Porque algumas mães precisam de mãos livres o tempo todo"*
@@ -107,6 +111,8 @@ Uma plataforma que **elimina barreiras** e **conecta mães** aos seus direitos, 
 - ⏰ **Alertas automáticos**: consultas, terapias, perícias INSS
 - 🩺 **Triagem inicial** com IA
 - 📊 **Histórico completo** da criança
+
+</details>
 
 ---
 
@@ -175,7 +181,8 @@ npm run dev
 
 ---
 
-## 🏗 **Arquitetura Técnica de Cinema**
+<details>
+<summary><h2>🏗 <strong>Arquitetura Técnica de Cinema</strong> (clique para expandir)</h2></summary>
 
 ### **Stack Tecnológica Completa**
 
@@ -212,6 +219,8 @@ npm run dev
 - **Processamento de documentos** em português
 - **Análise de sentimentos** em conversas
 - **Matching inteligente** mãe ↔ oportunidade
+
+</details>
 
 ---
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ClaraFixed from '../components/ClaraFixed'
+import ClaraMinimal from '../components/ClaraMinimal'
 import EmergencySystem from '../components/EmergencySystem'
 import DocumentCenter from '../components/DocumentCenter'
 import EducationalResources from '../components/EducationalResources'
@@ -116,8 +116,8 @@ export default function RootLayout({
             </div>
             
             {/* Assistente de Voz Clara - 100% em Português */}
-            <div className="fixed bottom-4 right-4 z-50 max-w-sm">
-              <ClaraFixed />
+            <div className="fixed bottom-4 right-4 z-50">
+              <ClaraMinimal />
             </div>
           </div>
           

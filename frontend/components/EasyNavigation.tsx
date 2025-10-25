@@ -9,7 +9,7 @@ interface NavItem {
   icon: string
   color: string
   priority: 'high' | 'medium' | 'low'
-  category: 'safety' | 'community' | 'resources' | 'documents'
+  category: 'safety' | 'community' | 'resources' | 'documents' | 'education'
 }
 
 const navigationItems: NavItem[] = [
@@ -51,6 +51,15 @@ const navigationItems: NavItem[] = [
   },
   {
     id: 'education',
+    title: 'Educação',
+    description: 'Estudos e crescimento',
+    icon: '🎓',
+    color: 'bg-purple-500 hover:bg-purple-600',
+    priority: 'medium',
+    category: 'education'
+  },
+  {
+    id: 'education',
     title: 'Aprenda',
     description: 'Seus direitos e recursos',
     icon: '📚',
@@ -82,7 +91,8 @@ export default function EasyNavigation({ onNavigate }: EasyNavigationProps) {
     { key: 'safety', label: 'Segurança', icon: '🚨' },
     { key: 'community', label: 'Comunidade', icon: '👥' },
     { key: 'resources', label: 'Recursos', icon: '📚' },
-    { key: 'documents', label: 'Documentos', icon: '📋' }
+    { key: 'documents', label: 'Documentos', icon: '📋' },
+    { key: 'education', label: 'Educação', icon: '🎓' }
   ]
 
   const filteredItems = navigationItems.filter(item => 

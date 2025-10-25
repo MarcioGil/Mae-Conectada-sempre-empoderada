@@ -295,6 +295,34 @@ export default function PortugueseVoiceAssistant({ className = '' }: PortugueseV
       return
     }
     
+    // Educação e estudos
+    if (cmd.includes('estudar') || cmd.includes('curso') || cmd.includes('não estudei') || cmd.includes('voltar para escola')) {
+      falarPortugues('Que maravilha que você quer estudar! A educação é o caminho mais poderoso para transformar sua vida. Nunca é tarde para aprender e crescer. Vou te mostrar todas as oportunidades educacionais disponíveis para você.')
+      setTimeout(() => window.location.href = '/educacao', 1500)
+      return
+    }
+    
+    // Educação dos filhos
+    if (cmd.includes('filho estudar') || cmd.includes('educação das crianças') || cmd.includes('escola dos filhos') || cmd.includes('ajudar nas lições')) {
+      falarPortugues('Você é uma mãe muito dedicada em se preocupar com a educação dos seus filhos! O apoio da família é fundamental para o sucesso escolar. Vou te dar dicas preciosas para ajudar seus pequenos a se desenvolverem.')
+      setTimeout(() => window.location.href = '/educacao', 1500)
+      return
+    }
+    
+    // Educação financeira
+    if (cmd.includes('controlar dinheiro') || cmd.includes('organizar gastos') || cmd.includes('educação financeira') || cmd.includes('aprender sobre dinheiro')) {
+      falarPortugues('Educação financeira é fundamental para conquistar independência! Vou te ensinar de forma simples como organizar seu orçamento, economizar e planejar um futuro mais próspero para você e sua família.')
+      setTimeout(() => window.location.href = '/educacao', 1500)
+      return
+    }
+    
+    // Desânimo com estudos
+    if (cmd.includes('não consigo estudar') || cmd.includes('difícil aprender') || cmd.includes('não tenho tempo') || cmd.includes('muito velho para estudar')) {
+      falarPortugues('Querida, nunca desista dos seus sonhos! Cada mulher tem seu tempo e seu jeito de aprender. Você é mais capaz do que imagina. Vamos encontrar formas que se encaixem na sua rotina. Pequenos passos levam a grandes conquistas!')
+      setTimeout(() => window.location.href = '/educacao', 1500)
+      return
+    }
+    
     // Mensagem de encorajamento geral
     if (cmd.includes('não aguento mais') || cmd.includes('muito difícil') || cmd.includes('quero desistir') || cmd.includes('cansada')) {
       falarPortugues('Eu sei que está difícil, minha querida, mas você é mais forte do que imagina. Já passou por tantas coisas e ainda está aqui, lutando. Isso mostra sua força incrível. Vamos passar por isso juntas, um dia de cada vez.')

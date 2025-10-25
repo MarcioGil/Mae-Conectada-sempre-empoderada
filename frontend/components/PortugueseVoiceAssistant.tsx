@@ -27,46 +27,54 @@ export default function PortugueseVoiceAssistant({ className = '' }: PortugueseV
     }
   }, [])
 
-  // Função para falar em português brasileiro
+  // Função para falar em português brasileiro com voz acolhedora e segura
   const falarPortugues = (texto: string) => {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel()
       
       const utterance = new SpeechSynthesisUtterance(texto)
       
-      // Configuração específica para português brasileiro
+      // Configuração específica para voz amável e segura
       utterance.lang = 'pt-BR'
-      utterance.rate = 0.85        // Velocidade mais lenta para melhor compreensão
-      utterance.pitch = 1.1        // Tom ligeiramente mais alto (feminino)
-      utterance.volume = 1.0       // Volume máximo
+      utterance.rate = 0.75        // Velocidade mais calma para transmitir segurança
+      utterance.pitch = 1.3        // Tom feminino mais alto e acolhedor
+      utterance.volume = 1.0       // Volume claro e presente
       
-      // Tentar usar voz brasileira se disponível
+      // Tentar usar voz feminina brasileira
       const voices = window.speechSynthesis.getVoices()
-      const vozBrasileira = voices.find(voice => 
-        voice.lang.includes('pt-BR') && voice.name.includes('Luciana')
+      
+      // Buscar especificamente vozes femininas e suaves
+      const feminineVoice = voices.find(voice => 
+        (voice.lang.includes('pt-BR') || voice.lang.includes('pt_BR')) &&
+        (voice.name.toLowerCase().includes('luciana') || 
+         voice.name.toLowerCase().includes('female') ||
+         voice.name.toLowerCase().includes('feminino') ||
+         voice.name.toLowerCase().includes('joana') ||
+         voice.name.toLowerCase().includes('raquel'))
       ) || voices.find(voice => 
-        voice.lang.includes('pt-BR')
+        voice.lang.includes('pt-BR') || voice.lang.includes('pt_BR')
       ) || voices.find(voice => 
         voice.lang.includes('pt')
       )
       
-      if (vozBrasileira) {
-        utterance.voice = vozBrasileira
+      if (feminineVoice) {
+        utterance.voice = feminineVoice
+        console.log('Usando voz:', feminineVoice.name)
       }
       
       utterance.onstart = () => {
         setIsSpeaking(true)
-        setStatus('Clara está falando...')
+        setStatus('Clara falando com carinho...')
       }
       
       utterance.onend = () => {
         setIsSpeaking(false)
-        setStatus('Pronta para ouvir')
+        setStatus('Clara pronta para te ouvir')
       }
       
       utterance.onerror = () => {
         setIsSpeaking(false)
-        setStatus('Erro na síntese de voz')
+        setStatus('Probleminha na voz, mas estou aqui')
       }
       
       window.speechSynthesis.speak(utterance)
@@ -194,16 +202,16 @@ export default function PortugueseVoiceAssistant({ className = '' }: PortugueseV
       return
     }
     
-    // Emergência - acolhedora mas eficaz
+    // Emergência - acolhedora mas eficaz com segurança
     if (cmd.includes('emergência') || cmd.includes('socorro') || cmd.includes('ajuda urgente') || cmd.includes('perigo')) {
-      falarPortugues('Entendi que você precisa de ajuda urgente. Você é corajosa. Vou ativar tudo para te proteger!')
+      falarPortugues('Entendi que você precisa de ajuda urgente, minha querida. Você foi muito corajosa em pedir ajuda. Vou ativar tudo para te proteger. Respira fundo, você não está sozinha.')
       setTimeout(() => window.location.href = '/emergencia', 1500)
       return
     }
     
-    // Proteção - solidária
+    // Proteção - solidária e firme
     if (cmd.includes('proteção') || cmd.includes('violência') || cmd.includes('agressão') || cmd.includes('segurança')) {
-      falarPortugues('Sua segurança é prioridade. Vou te mostrar todas as formas de proteção. Você não está sozinha!')
+      falarPortugues('Sua segurança é nossa prioridade absoluta, amor. Você tem direito à proteção e não está sozinha nessa luta. Vou te mostrar todos os recursos disponíveis. Você é forte e merece viver em paz.')
       setTimeout(() => window.location.href = '/protecao', 1500)
       return
     }
@@ -253,9 +261,43 @@ export default function PortugueseVoiceAssistant({ className = '' }: PortugueseV
       return
     }
     
-    // Autoestima - encorajadora
+    // Autoestima - encorajadora e empoderadora
     if (cmd.includes('não consigo') || cmd.includes('incapaz') || cmd.includes('não sei') || cmd.includes('burra')) {
-      falarPortugues('Ei, para com isso! Você é incrível e capaz de muito mais do que imagina. Cada passo que você dá é uma vitória, guerreira!')
+      falarPortugues('Para com isso agora mesmo, minha querida! Você é incrível e muito mais capaz do que imagina. Olha tudo que já conseguiu até aqui! Cada passo que você dá é uma vitória, e eu acredito muito em você, guerreira!')
+      return
+    }
+    
+    // Comandos específicos de segurança e proteção
+    if (cmd.includes('ele me bate') || cmd.includes('me agride') || cmd.includes('tenho medo dele') || cmd.includes('me ameaça')) {
+      falarPortugues('Querida, você não merece isso. Nenhuma mulher merece. Isso não é amor, é violência, e você tem direito à proteção. Vou te mostrar como se proteger e buscar ajuda. Você é corajosa por falar sobre isso.')
+      setTimeout(() => window.location.href = '/protecao', 1500)
+      return
+    }
+    
+    // Dúvidas sobre direitos
+    if (cmd.includes('tenho direito') || cmd.includes('posso pedir') || cmd.includes('benefício') || cmd.includes('auxílio')) {
+      falarPortugues('Claro que você tem direitos, amor! Você merece todo o apoio que existe. Vou te mostrar tudinho que você pode acessar. Conhecer seus direitos é o primeiro passo para conquistar uma vida melhor.')
+      setTimeout(() => window.location.href = '/direitos', 1500)
+      return
+    }
+    
+    // Isolamento social
+    if (cmd.includes('sozinha') || cmd.includes('isolada') || cmd.includes('ninguém me entende') || cmd.includes('sem amigos')) {
+      falarPortugues('Você não está sozinha, minha linda. Existe uma comunidade inteira de mulheres que passaram por situações parecidas e estão prontas para te acolher. Vamos te conectar com elas, tá bom?')
+      setTimeout(() => window.location.href = '/comunidade', 1500)
+      return
+    }
+    
+    // Preocupações financeiras
+    if (cmd.includes('sem dinheiro') || cmd.includes('não tenho renda') || cmd.includes('dificuldade financeira') || cmd.includes('preciso trabalhar')) {
+      falarPortugues('Entendo suas preocupações, querida. Dificuldades financeiras são muito estressantes, mas temos soluções. Vou te mostrar oportunidades de trabalho e renda que podem te ajudar a conquistar sua independência.')
+      setTimeout(() => window.location.href = '/trabalho', 1500)
+      return
+    }
+    
+    // Mensagem de encorajamento geral
+    if (cmd.includes('não aguento mais') || cmd.includes('muito difícil') || cmd.includes('quero desistir') || cmd.includes('cansada')) {
+      falarPortugues('Eu sei que está difícil, minha querida, mas você é mais forte do que imagina. Já passou por tantas coisas e ainda está aqui, lutando. Isso mostra sua força incrível. Vamos passar por isso juntas, um dia de cada vez.')
       return
     }
     

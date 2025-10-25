@@ -69,14 +69,41 @@ export const MESSAGES = {
     LOADING: 'Carregando com carinho...'
   },
 
-  // Mensagens de apoio emocional
-  EMOTIONAL_SUPPORT: {
-    STRESS: 'Percebo que você pode estar estressada. Que tal respirar fundo? Você está indo muito bem!',
-    ENCOURAGEMENT: 'Você é uma guerreira! Cada dia que passa você fica mais forte.',
-    CONFIDENCE: 'Confie em você, querida. Você tem tudo que precisa para vencer!',
-    HOPE: 'Dias difíceis passam, mas sua força permanece. Continue acreditando!',
-    STRENGTH: 'Você já superou tantas coisas! Esta também vai passar.',
-    GRATITUDE: 'Que alegria poder te acompanhar nessa jornada. Você é especial!'
+  // Mensagens de segurança e proteção - Tom firme mas acolhedor
+  SECURITY: {
+    SAFE_SPACE: 'Este é seu espaço seguro, querida. Aqui você pode falar sobre qualquer coisa sem julgamento.',
+    PROTECTION_AVAILABLE: 'Você tem direito à proteção, amor. Estou aqui para te mostrar todos os recursos disponíveis.',
+    NOT_ALONE: 'Você nunca está sozinha. Existe uma rede inteira de apoio esperando para te acolher.',
+    STRENGTH_REMINDER: 'Lembre-se: você é mais forte e corajosa do que imagina. Já superou tantas coisas!',
+    TRUST_YOURSELF: 'Confie na sua intuição, querida. Se algo não está certo, você tem razão em se preocupar.',
+    EMERGENCY_READY: 'Se precisar de ajuda urgente, só me chamar. Tenho contatos de emergência prontos para você.',
+    LEGAL_RIGHTS: 'Você tem direitos legais que te protegem. Vou te explicar cada um deles com carinho.',
+    EMOTIONAL_SAFETY: 'Seus sentimentos são válidos. É normal sentir medo, raiva ou tristeza em situações difíceis.'
+  },
+
+  // Frases de empoderamento com segurança
+  EMPOWERMENT: {
+    INNER_STRENGTH: 'A força que você procura já está dentro de você, minha querida. Só precisa lembrar que ela existe.',
+    DECISION_POWER: 'Suas decisões são suas. Ninguém pode te forçar a fazer algo que não quer.',
+    VOICE_MATTERS: 'Sua voz importa, amor. Quando você fala, o mundo precisa escutar.',
+    BOUNDARIES: 'Você tem o direito de dizer não. Estabelecer limites é um ato de amor próprio.',
+    SELF_WORTH: 'Você vale muito mais do que qualquer pessoa pode te fazer acreditar.',
+    FUTURE_HOPE: 'Dias melhores virão, querida. Continue caminhando, um passo de cada vez.',
+    COMMUNITY_STRENGTH: 'Juntas somos mais fortes. Outras mulheres já passaram por isso e estão aqui para te apoiar.',
+    HEALING_TIME: 'Cura leva tempo, e está tudo bem. Seja paciente e carinhosa consigo mesma.'
+  },
+
+  // Mensagens específicas para situações de vulnerabilidade
+  VULNERABILITY: {
+    VIOLENCE_SUPPORT: 'Se você está sofrendo violência, saiba que não é sua culpa. Você merece amor e respeito.',
+    FINANCIAL_FEAR: 'Preocupações financeiras são normais. Vamos ver juntas quais benefícios você tem direito.',
+    FINANCIAL_STRESS: 'Entendo suas preocupações financeiras, querida. Dificuldades com dinheiro são muito estressantes, mas temos soluções e caminhos para te ajudar.',
+    ISOLATION_COMFORT: 'Sentir-se isolada é difícil, mas você não está realmente sozinha. Estou aqui com você.',
+    SELF_DOUBT: 'Quando duvidar de si mesma, lembre-se de todas as batalhas que já venceu. Você é uma guerreira.',
+    OVERWHELMED: 'Está se sentindo sobrecarregada? Vamos respirar juntas e organizar as coisas passo a passo.',
+    GUILT_RELIEF: 'Pare de se culpar, amor. Você está fazendo o melhor que pode com o que tem.',
+    FEAR_VALIDATION: 'Seus medos são compreensíveis. Vamos transformar esse medo em força para agir.',
+    HOPE_RESTORATION: 'Mesmo nos momentos mais escuros, existe uma luz esperando para brilhar. Confie nisso.'
   },
 
   // Categorias e Seções
@@ -111,23 +138,24 @@ export const MESSAGES = {
   }
 }
 
-// Configuração de voz em português brasileiro
+// Configuração de voz em português brasileiro - Amável e Segura
 export const VOICE_CONFIG = {
   LANGUAGE: 'pt-BR',
-  RATE: 0.9,        // Velocidade da fala (0.1 a 10)
-  PITCH: 1.0,       // Tom da voz (0 a 2)
-  VOLUME: 1.0,      // Volume (0 a 1)
+  RATE: 0.8,         // Velocidade mais calma para transmitir tranquilidade
+  PITCH: 1.2,        // Tom feminino mais suave e maternal
+  VOLUME: 1.0,       // Volume claro e presente
   VOICE_NAME: 'Microsoft Luciana Online (Natural) - Portuguese (Brazil)', // Voz preferida
   FALLBACK_VOICES: [
     'Google português do Brasil',
     'Microsoft Luciana - Portuguese (Brazil)',
-    'Joana (enhanced)', // iOS Brasil
+    'Joana (enhanced)', // iOS Brasil - voz feminina
     'Luciana', // Windows Brasil
-    'pt-BR-Standard-A' // Google Cloud TTS
+    'Raquel', // Alternativa feminina
+    'pt-BR-Standard-A' // Google Cloud TTS feminina
   ]
 }
 
-// Função para selecionar a melhor voz em português brasileiro
+// Função para selecionar a melhor voz feminina e acolhedora em português brasileiro
 export function getBestPortugueseVoice(): SpeechSynthesisVoice | null {
   if (typeof window === 'undefined' || !window.speechSynthesis) {
     return null
@@ -135,19 +163,33 @@ export function getBestPortugueseVoice(): SpeechSynthesisVoice | null {
 
   const voices = window.speechSynthesis.getVoices()
   
-  // Priorizar vozes em português brasileiro
+  // Priorizar vozes femininas em português brasileiro
   const brazilianVoices = voices.filter(voice => 
     voice.lang.includes('pt-BR') || voice.lang.includes('pt_BR')
   )
   
-  // Procurar por voz preferida
-  for (const preferredName of [VOICE_CONFIG.VOICE_NAME, ...VOICE_CONFIG.FALLBACK_VOICES]) {
-    const voice = brazilianVoices.find(v => v.name.includes(preferredName))
+  // Buscar especificamente por vozes femininas conhecidas
+  const feminineVoiceNames = [
+    'Luciana', 'Raquel', 'Joana', 'Maria', 'Ana', 'Fernanda', 'Camila',
+    'Microsoft Luciana', 'Google português do Brasil feminino',
+    'pt-BR-Standard-A', 'pt-BR-Neural2-A', 'pt-BR-Wavenet-A'
+  ]
+  
+  // Procurar por voz feminina preferida
+  for (const voiceName of feminineVoiceNames) {
+    const voice = brazilianVoices.find(v => 
+      v.name.toLowerCase().includes(voiceName.toLowerCase()) ||
+      v.name.includes('female') || v.name.includes('feminino')
+    )
     if (voice) return voice
   }
   
-  // Retornar primeira voz brasileira disponível
-  return brazilianVoices[0] || voices.find(v => v.lang.includes('pt')) || null
+  // Fallback: primeira voz brasileira disponível
+  const firstBrazilian = brazilianVoices[0]
+  if (firstBrazilian) return firstBrazilian
+  
+  // Último recurso: qualquer voz em português
+  return voices.find(v => v.lang.includes('pt')) || null
 }
 
 // Função para normalizar comandos de voz

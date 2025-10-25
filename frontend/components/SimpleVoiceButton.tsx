@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { MESSAGES, VOICE_CONFIG, getBestPortugueseVoice, normalizeCommand, matchCommand } from '../utils/portuguese'
 
 interface SimpleVoiceButtonProps {
   className?: string
@@ -10,6 +11,7 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
   const [isListening, setIsListening] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isSupported, setIsSupported] = useState(false)
+  const [lastCommand, setLastCommand] = useState('')
   const recognitionRef = useRef<any>(null)
 
   useEffect(() => {
@@ -26,10 +28,25 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
       window.speechSynthesis.cancel()
       
       const utterance = new SpeechSynthesisUtterance(text)
-      utterance.lang = 'pt-BR'
-      utterance.rate = 0.9
+      
+      // Configurar para português brasileiro
+      utterance.lang = VOICE_CONFIG.LANGUAGE
+      utterance.rate = VOICE_CONFIG.RATE
+      utterance.pitch = VOICE_CONFIG.PITCH
+      utterance.volume = VOICE_CONFIG.VOLUME
+      
+      // Tentar usar a melhor voz em português
+      const bestVoice = getBestPortugueseVoice()
+      if (bestVoice) {
+        utterance.voice = bestVoice
+      }
+      
       utterance.onstart = () => setIsSpeaking(true)
       utterance.onend = () => setIsSpeaking(false)
+      utterance.onerror = () => {
+        setIsSpeaking(false)
+        console.error('Erro na síntese de voz')
+      }
       
       window.speechSynthesis.speak(utterance)
     }
@@ -42,16 +59,18 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
     
     if (SpeechRecognition && !isListening) {
       recognitionRef.current = new SpeechRecognition()
-      recognitionRef.current.lang = 'pt-BR'
+      recognitionRef.current.lang = VOICE_CONFIG.LANGUAGE
       recognitionRef.current.continuous = false
       recognitionRef.current.interimResults = false
 
       recognitionRef.current.onstart = () => {
         setIsListening(true)
+        speak(MESSAGES.CLARA.LISTENING)
       }
 
       recognitionRef.current.onresult = (event: any) => {
         const command = event.results[0][0].transcript.toLowerCase()
+        setLastCommand(command)
         handleCommand(command)
       }
 
@@ -61,7 +80,7 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
 
       recognitionRef.current.onerror = () => {
         setIsListening(false)
-        speak('Erro no reconhecimento. Tente novamente.')
+        speak(MESSAGES.CLARA.ERROR_RECOGNITION)
       }
 
       try {
@@ -69,6 +88,7 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
       } catch (error) {
         console.error('Erro ao iniciar reconhecimento:', error)
         setIsListening(false)
+        speak(MESSAGES.CLARA.ERROR_RECOGNITION)
       }
     }
   }
@@ -81,23 +101,82 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
 
   const handleCommand = (command: string) => {
     console.log('Comando recebido:', command)
+    const cmd = normalizeCommand(command)
     
-    if (command.includes('direito') || command.includes('benefício')) {
-      speak('Abrindo seção de direitos')
-      setTimeout(() => window.location.href = '/direitos', 1000)
-    } else if (command.includes('trabalho') || command.includes('emprego')) {
-      speak('Buscando oportunidades de trabalho')
-      setTimeout(() => window.location.href = '/trabalho', 1000)
-    } else if (command.includes('curso') || command.includes('estudo')) {
-      speak('Mostrando cursos disponíveis')
-      setTimeout(() => window.location.href = '/cursos', 1000)
-    } else if (command.includes('ajuda')) {
-      speak('Posso te ajudar com direitos, trabalho, cursos e muito mais. Como posso ajudar você hoje?')
-    } else if (command.includes('clara') || command.includes('olá')) {
-      speak('Olá! Sou Clara, sua assistente virtual. Como posso ajudar você hoje?')
-    } else {
-      speak('Não entendi. Diga: direitos, trabalho, cursos ou ajuda.')
+    // Verificar saudações
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.HELLO)) {
+      speak(MESSAGES.CLARA.GREETING)
+      return
     }
+    
+    // Verificar despedidas
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.GOODBYE)) {
+      speak(MESSAGES.CLARA.GOODBYE)
+      return
+    }
+    
+    // Verificar agradecimentos
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.THANKS)) {
+      speak(MESSAGES.CLARA.THANKS_RESPONSE)
+      return
+    }
+    
+    // Verificar comandos de navegação
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.RIGHTS)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_RIGHTS)
+      setTimeout(() => window.location.href = '/direitos', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.WORK)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_WORK)
+      setTimeout(() => window.location.href = '/trabalho', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.COURSES)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_COURSES)
+      setTimeout(() => window.location.href = '/cursos', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.DOCUMENTS)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_DOCUMENTS)
+      setTimeout(() => window.location.href = '/documentos', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.EMERGENCY)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_EMERGENCY)
+      setTimeout(() => window.location.href = '/emergencia', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.PROTECTION)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_PROTECTION)
+      setTimeout(() => window.location.href = '/protecao', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.COMMUNITY)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_COMMUNITY)
+      setTimeout(() => window.location.href = '/comunidade', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.HOME)) {
+      speak(MESSAGES.NAVIGATION.GOING_TO_HOME)
+      setTimeout(() => window.location.href = '/', 1000)
+      return
+    }
+    
+    if (matchCommand(cmd, MESSAGES.VOICE_COMMANDS.HELP)) {
+      speak(MESSAGES.CLARA.COMMANDS_HELP)
+      return
+    }
+    
+    // Comando não reconhecido
+    speak(MESSAGES.CLARA.NOT_UNDERSTOOD)
   }
 
   const toggleVoice = () => {
@@ -116,7 +195,7 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
   if (!isSupported) {
     return (
       <div className={`bg-gray-200 text-gray-600 p-4 rounded-lg ${className}`}>
-        <p className="text-sm">Assistente de voz não disponível neste navegador</p>
+        <p className="text-sm">{MESSAGES.CLARA.NOT_SUPPORTED}</p>
       </div>
     )
   }
@@ -149,22 +228,27 @@ export default function SimpleVoiceButton({ className = '' }: SimpleVoiceButtonP
           focus:outline-none focus:ring-2 focus:ring-purple-300
         `}
         aria-label={
-          isListening ? 'Parar de ouvir' : 
-          isSpeaking ? 'Parar de falar' : 
-          'Ativar assistente Clara'
+          isListening ? MESSAGES.UI.STOP_LISTENING : 
+          isSpeaking ? MESSAGES.UI.STOP_SPEAKING : 
+          MESSAGES.UI.START_SPEAKING
         }
       >
         {isListening ? (
-          <>🎤 Ouvindo...</>
+          <>🎤 {MESSAGES.STATUS.LISTENING}</>
         ) : isSpeaking ? (
-          <>🔊 Falando...</>
+          <>🔊 {MESSAGES.STATUS.SPEAKING}</>
         ) : (
-          <>🎙️ Falar com Clara</>
+          <>🎙️ {MESSAGES.UI.START_SPEAKING}</>
         )}
       </button>
 
       <div className="mt-3 text-xs text-gray-500">
         <p><strong>Diga:</strong> "Olá Clara", "Direitos", "Trabalho", "Cursos" ou "Ajuda"</p>
+        {lastCommand && (
+          <p className="mt-1 text-purple-600">
+            <strong>Último comando:</strong> "{lastCommand}"
+          </p>
+        )}
       </div>
     </div>
   )

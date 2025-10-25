@@ -32,14 +32,15 @@ const nextConfig = {
   // PWA e Acessibilidade
   poweredByHeader: false,
   reactStrictMode: true,
-  // Configuração para GitHub Pages
-  output: 'export',
-  trailingSlash: true,
+  // Configuração otimizada para Vercel
   images: {
-    unoptimized: true
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/Mae-Conecta/' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/Mae-Conecta' : '',
 };
 
 module.exports = withPWA(nextConfig);

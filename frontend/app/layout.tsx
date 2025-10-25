@@ -1,6 +1,3 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import ClaraBasic from '../components/ClaraBasic'
@@ -18,23 +15,20 @@ const inter = Inter({
   variable: '--font-inter'
 })
 
+export const metadata = {
+  title: '🤱 Mãe Conecta - Plataforma de Apoio e Empoderamento',
+  description: 'Plataforma completa de apoio e empoderamento para mães brasileiras',
+}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-
   return (
-    <html lang="pt-BR" className={inter.variable}>
+    <html lang="pt-BR">
+      <body className={inter.variable}>
+        <AccessibilityProvider>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

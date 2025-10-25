@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { MicrophoneIcon, SpeakerWaveIcon, StopIcon } from '@heroicons/react/24/outline'
 import { useAccessibility } from '../contexts/AccessibilityContext'
-import { useRouter } from 'next/navigation'
 
 interface VoiceAssistantProps {
   className?: string
@@ -26,7 +25,6 @@ export default function VoiceAssistant({ className = '' }: VoiceAssistantProps) 
   const recognitionRef = useRef<any>(null)
   const synthRef = useRef<SpeechSynthesis | null>(null)
   const { announceToScreenReader } = useAccessibility()
-  const router = useRouter()
 
   // Verificar suporte para Web Speech API
   useEffect(() => {
@@ -154,91 +152,71 @@ export default function VoiceAssistant({ className = '' }: VoiceAssistantProps) 
   const handleVoiceCommand = useCallback((command: string) => {
     const normalizedCommand = command.toLowerCase().trim()
     
-    // Comandos de navegação
-    const navigationCommands: { [key: string]: { route: string; response: string } } = {
-      'direitos': {
-        route: '/direitos',
-        response: 'Navegando para a seção de direitos. Aqui você pode conhecer seus direitos sociais.'
-      },
-      'meus direitos': {
-        route: '/direitos',
-        response: 'Abrindo seus direitos. Vou te ajudar a entender seus benefícios.'
-      },
-      'trabalho': {
-        route: '/trabalho',
-        response: 'Indo para oportunidades de trabalho. Vamos encontrar vagas para você.'
-      },
-      'emprego': {
-        route: '/trabalho',
-        response: 'Buscando empregos para você. Tenho várias oportunidades.'
-      },
-      'cursos': {
-        route: '/cursos',
-        response: 'Mostrando cursos disponíveis. Vamos capacitar você.'
-      },
-      'capacitação': {
-        route: '/cursos',
-        response: 'Acessando área de capacitação. Há muitos cursos gratuitos.'
-      },
-      'comunidade': {
-        route: '/comunidade',
-        response: 'Conectando você à comunidade. Vamos conversar com outras mães.'
-      },
-      'saúde': {
-        route: '/saude',
-        response: 'Abrindo informações de saúde. Cuidar de você é prioridade.'
-      },
-      'jornada': {
-        route: '/jornada',
-        response: 'Iniciando sua jornada de acolhimento. Estou aqui para te apoiar.'
-      },
-      'ajuda': {
-        route: '/ajuda',
-        response: 'Mostrando a central de ajuda. Como posso te auxiliar hoje?'
-      },
-      'início': {
-        route: '/',
-        response: 'Voltando à página inicial. Bem-vinda de volta!'
-      },
-      'home': {
-        route: '/',
-        response: 'Indo para o início. O que gostaria de fazer hoje?'
-      }
+    // Comandos de navegação simples
+    if (normalizedCommand.includes('direitos') || normalizedCommand.includes('benefício')) {
+      speak('Navegando para a seção de direitos. Aqui você pode conhecer seus direitos sociais.')
+      setTimeout(() => {
+        window.location.href = '/direitos'
+      }, 2000)
+      return
+    }
+
+    if (normalizedCommand.includes('trabalho') || normalizedCommand.includes('emprego')) {
+      speak('Indo para oportunidades de trabalho. Vamos encontrar vagas para você.')
+      setTimeout(() => {
+        window.location.href = '/trabalho'
+      }, 2000)
+      return
+    }
+
+    if (normalizedCommand.includes('cursos') || normalizedCommand.includes('estudo')) {
+      speak('Mostrando cursos disponíveis. Vamos capacitar você.')
+      setTimeout(() => {
+        window.location.href = '/cursos'
+      }, 2000)
+      return
+    }
+
+    if (normalizedCommand.includes('comunidade') || normalizedCommand.includes('apoio')) {
+      speak('Conectando você à comunidade. Vamos conversar com outras mães.')
+      setTimeout(() => {
+        window.location.href = '/comunidade'
+      }, 2000)
+      return
+    }
+
+    if (normalizedCommand.includes('saúde') || normalizedCommand.includes('médico')) {
+      speak('Abrindo informações de saúde. Cuidar de você é prioridade.')
+      setTimeout(() => {
+        window.location.href = '/saude'
+      }, 2000)
+      return
     }
 
     // Comandos de interação
-    const interactionCommands: { [key: string]: string } = {
-      'olá clara': 'Olá! Sou Clara, sua assistente virtual. Como posso ajudar você hoje?',
-      'oi clara': 'Oi! Estou aqui para te apoiar. Em que posso ser útil?',
-      'clara': 'Sim? Estou ouvindo. Como posso te ajudar?',
-      'obrigada': 'De nada! Estou sempre aqui para você. Precisando, é só chamar!',
-      'obrigado': 'Por nada! Fico feliz em ajudar. Conte comigo sempre!',
-      'tchau': 'Até logo! Estarei aqui quando precisar. Cuide-se!',
-      'parar': 'Ok, parando por aqui. Até a próxima!'
+    if (normalizedCommand.includes('olá') || normalizedCommand.includes('oi') || normalizedCommand.includes('clara')) {
+      speak('Olá! Sou Clara, sua assistente virtual. Como posso ajudar você hoje?')
+      return
     }
 
-    // Verificar comandos de navegação
-    for (const [key, value] of Object.entries(navigationCommands)) {
-      if (normalizedCommand.includes(key)) {
-        speak(value.response)
-        setTimeout(() => {
-          router.push(value.route)
-        }, 1000)
-        return
-      }
+    if (normalizedCommand.includes('ajuda')) {
+      speak('Posso te ajudar a navegar pelo app. Diga: direitos, trabalho, cursos, comunidade ou saúde para acessar essas seções.')
+      return
     }
 
-    // Verificar comandos de interação
-    for (const [key, response] of Object.entries(interactionCommands)) {
-      if (normalizedCommand.includes(key)) {
-        speak(response)
-        return
-      }
+    if (normalizedCommand.includes('obrigad')) {
+      speak('De nada! Estou sempre aqui para você. Precisando, é só chamar!')
+      return
+    }
+
+    if (normalizedCommand.includes('tchau') || normalizedCommand.includes('até logo')) {
+      speak('Até logo! Estarei aqui quando precisar. Cuide-se!')
+      return
     }
 
     // Comando não reconhecido
     speak('Desculpe, não entendi. Tente dizer "ajuda" para ver o que posso fazer, ou diga "olá Clara" para começarmos.')
-  }, [speak, router])
+  }, [speak])
 
   // Função para alternar microfone
   const toggleMicrophone = useCallback(() => {
@@ -386,214 +364,8 @@ export default function VoiceAssistant({ className = '' }: VoiceAssistantProps) 
           <div>"Buscar trabalho"</div>
           <div>"Ver cursos"</div>
           <div>"Ajuda"</div>
-          <div>"Ir para início"</div>
+          <div>"Comunidade"</div>
         </div>
-      </div>
-    </div>
-  )
-}
-          setIsListening(false)
-        }
-      }
-
-      if (speechSynthesis) {
-        synthRef.current = speechSynthesis
-      }
-    }
-  }, [announceToScreenReader])
-
-  const startListening = () => {
-    if (recognitionRef.current && !isListening) {
-      try {
-        recognitionRef.current.start()
-      } catch (error) {
-        setError('Não foi possível iniciar o reconhecimento de voz')
-        announceToScreenReader('Erro: Não foi possível iniciar o reconhecimento de voz')
-      }
-    }
-  }
-
-  const stopListening = () => {
-    if (recognitionRef.current && isListening) {
-      recognitionRef.current.stop()
-    }
-  }
-
-  const speak = (text: string) => {
-    if (synthRef.current) {
-      // Parar qualquer fala anterior
-      synthRef.current.cancel()
-      
-      const utterance = new SpeechSynthesisUtterance(text)
-      utterance.lang = 'pt-BR'
-      utterance.rate = 0.9
-      utterance.pitch = 1
-      utterance.volume = 1
-
-      utterance.onstart = () => {
-        setIsSpeaking(true)
-        announceToScreenReader('Clara está falando')
-      }
-
-      utterance.onend = () => {
-        setIsSpeaking(false)
-      }
-
-      utterance.onerror = () => {
-        setIsSpeaking(false)
-        setError('Erro na síntese de voz')
-      }
-
-      synthRef.current.speak(utterance)
-    }
-  }
-
-  const stopSpeaking = () => {
-    if (synthRef.current) {
-      synthRef.current.cancel()
-      setIsSpeaking(false)
-    }
-  }
-
-  const handleVoiceCommand = (command: string) => {
-    const lowerCommand = command.toLowerCase()
-
-    // Comandos básicos de navegação
-    if (lowerCommand.includes('página inicial') || lowerCommand.includes('home')) {
-      window.location.href = '/'
-      speak('Navegando para a página inicial')
-      return
-    }
-
-    if (lowerCommand.includes('meus direitos') || lowerCommand.includes('direitos')) {
-      window.location.href = '/direitos'
-      speak('Abrindo a seção Direitos Sem Medo')
-      return
-    }
-
-    if (lowerCommand.includes('trabalho') || lowerCommand.includes('emprego') || lowerCommand.includes('vagas')) {
-      window.location.href = '/trabalho'
-      speak('Abrindo o Conecta Vagas')
-      return
-    }
-
-    if (lowerCommand.includes('comunidade') || lowerCommand.includes('apoio')) {
-      window.location.href = '/comunidade'
-      speak('Abrindo os Ninhos de Apoio')
-      return
-    }
-
-    if (lowerCommand.includes('cursos') || lowerCommand.includes('aprender')) {
-      window.location.href = '/cursos'
-      speak('Abrindo a Academia da Mãe')
-      return
-    }
-
-    if (lowerCommand.includes('saúde') || lowerCommand.includes('consulta')) {
-      window.location.href = '/saude'
-      speak('Abrindo o calendário de saúde')
-      return
-    }
-
-    if (lowerCommand.includes('ajuda') || lowerCommand.includes('socorro')) {
-      speak('Estou aqui para te ajudar! Você pode dizer: meus direitos, trabalho, comunidade, cursos ou saúde para navegar pelo app. Ou me faça uma pergunta sobre seus direitos e benefícios.')
-      return
-    }
-
-    // Comando genérico - resposta padrão
-    speak('Desculpe, não entendi esse comando. Diga ajuda para conhecer os comandos disponíveis.')
-  }
-
-  return (
-    <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
-      {/* Botão principal do assistente */}
-      <div className="relative">
-        <button
-          onClick={isListening ? stopListening : startListening}
-          disabled={isSpeaking}
-          className={`
-            w-16 h-16 rounded-full shadow-lg transition-all duration-300 focus-visible
-            ${isListening 
-              ? 'bg-red-500 hover:bg-red-600 animate-pulse' 
-              : 'bg-primary-600 hover:bg-primary-700'
-            }
-            ${isSpeaking ? 'opacity-50 cursor-not-allowed' : ''}
-            text-white touch-target-lg
-          `}
-          aria-label={isListening ? 'Parar de ouvir' : 'Ativar assistente de voz Clara'}
-          aria-describedby="voice-assistant-description"
-        >
-          {isListening ? (
-            <StopIcon className="w-8 h-8 mx-auto" />
-          ) : (
-            <MicrophoneIcon className="w-8 h-8 mx-auto" />
-          )}
-        </button>
-
-        {/* Botão para parar a fala */}
-        {isSpeaking && (
-          <button
-            onClick={stopSpeaking}
-            className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-orange-500 hover:bg-orange-600 text-white shadow-md focus-visible"
-            aria-label="Parar Clara de falar"
-          >
-            <SpeakerWaveIcon className="w-4 h-4 mx-auto" />
-          </button>
-        )}
-
-        {/* Indicador visual de status */}
-        {(isListening || isSpeaking) && (
-          <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-green-400 animate-bounce" />
-        )}
-      </div>
-
-      {/* Feedback textual escondido para screen readers */}
-      <div 
-        id="voice-assistant-description" 
-        className="sr-only"
-      >
-        Assistente de voz Clara. Aperte para falar comandos como: meus direitos, trabalho, comunidade, cursos, saúde ou ajuda.
-      </div>
-
-      {/* Transcrição atual (para debug e acessibilidade) */}
-      {transcript && (
-        <div 
-          className="absolute bottom-20 right-0 bg-black bg-opacity-80 text-white p-3 rounded-lg max-w-xs text-sm"
-          role="status"
-          aria-live="polite"
-        >
-          <p className="font-medium">Você disse:</p>
-          <p>"{transcript}"</p>
-        </div>
-      )}
-
-      {/* Mensagem de erro */}
-      {error && (
-        <div 
-          className="absolute bottom-20 right-0 bg-red-600 text-white p-3 rounded-lg max-w-xs text-sm"
-          role="alert"
-          aria-live="assertive"
-        >
-          {error}
-        </div>
-      )}
-
-      {/* Tutorial flutuante para novos usuários */}
-      <div className="absolute bottom-20 right-0 bg-blue-600 text-white p-4 rounded-lg max-w-sm text-sm shadow-lg hidden" id="voice-tutorial">
-        <h3 className="font-bold mb-2">👋 Oi! Eu sou a Clara!</h3>
-        <p className="mb-2">Seu assistente de voz. Aperte o botão e diga:</p>
-        <ul className="list-disc list-inside space-y-1 text-xs">
-          <li>"Meus direitos" - para BPC e benefícios</li>
-          <li>"Trabalho" - para encontrar vagas</li>
-          <li>"Comunidade" - para conversar com outras mães</li>
-          <li>"Ajuda" - para mais comandos</li>
-        </ul>
-        <button 
-          className="mt-3 text-xs underline"
-          onClick={() => document.getElementById('voice-tutorial')?.classList.add('hidden')}
-        >
-          Entendi!
-        </button>
       </div>
     </div>
   )

@@ -65,8 +65,14 @@ const nextConfig = {
   // PWA e Acessibilidade
   poweredByHeader: false,
   reactStrictMode: true,
-  // Otimizações para performance móvel
-  output: 'standalone',
+  // Configuração para GitHub Pages
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/Mae-Conecta/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/Mae-Conecta' : '',
 };
 
 module.exports = withPWA(nextConfig);

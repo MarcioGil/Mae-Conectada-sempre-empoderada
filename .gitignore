@@ -1,52 +1,198 @@
-# Dependências
+# ========================================
+# 🌟 MAE CONECTA - GITIGNORE COMPLETO
+# ========================================
+
+# 📦 Dependências e Packages
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-# Build outputs
+# 🏗️ Build Outputs
 dist/
 build/
 out/
 .next/
+.nuxt/
+.vite/
+.turbo/
 
-# Cache
-.npm
-.yarn
-.eslintcache
-.tsbuildinfo
-
-# Logs
-logs
+# 📝 Logs
+logs/
 *.log
 lerna-debug.log*
 .pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# 🔄 Cache e Temp
+.npm
+.yarn
+.cache/
+.temp/
+.tmp/
+.eslintcache
+.tsbuildinfo
+*.tsbuildinfo
+.sass-cache/
+.stylelintcache
 
-# Coverage directory usado por ferramentas como istanbul
+# 🧪 Testes e Coverage
 coverage/
 *.lcov
-
-# Instrumentação de coverage do nyc
 .nyc_output
+test-results/
+playwright-report/
+test-results/
+coverage.json
 
-# Dependency directory
-node_modules/
-jspm_packages/
+# 🌐 Variáveis de Ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging
+.env.*.local
 
-# TypeScript cache
-*.tsbuildinfo
+# 🔐 Chaves e Secrets
+*.key
+*.pem
+*.p12
+*.crt
+secrets.json
+config/secrets/
 
-# Optional npm cache directory
-.npm
+# 🗄️ Banco de Dados
+*.sqlite
+*.sqlite3
+*.db
+database.json
+prisma/dev.db*
 
-# Optional eslint cache
-.eslintcache
+# 🖼️ Uploads e Mídia (exceto exemplos)
+uploads/
+public/uploads/
+storage/
+!public/images/examples/
+!public/avatars/default/
+
+# 📊 Analytics e Relatórios
+lighthouse-report.html
+bundle-analyzer-report.html
+size-limit-report.json
+coverage-report/
+performance-report/
+
+# 🎯 IDEs e Editores
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 📱 Mobile e PWA
+*.mobileprovision
+*.keystore
+android/
+ios/
+.expo/
+expo-env.d.ts
+
+# 🐳 Docker
+docker-compose.override.yml
+.dockerignore.bak
+
+# ☁️ Cloud e Deploy
+.vercel
+.netlify
+.firebase/
+.gcloud/
+terraform.tfstate*
+.terraform/
+
+# 🤖 AI e ML
+*.model
+*.h5
+*.pkl
+*.joblib
+ai-models/
+training-data/
+!ai-models/README.md
+
+# 📈 Monitoramento
+sentry.properties
+newrelic.js
+datadog.yaml
+
+# 🧹 Sistema e Temp
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# 🔧 Configurações Locais
+config.local.json
+settings.local.json
+.local/
+
+# 📱 React Native
+.expo/
+.expo-shared/
+web-build/
+bare-expo-env.d.ts
+
+# 🎮 Game Engine (futuro)
+*.unity
+*.unitypackage
+
+# 📚 Documentação gerada
+docs/build/
+storybook-static/
+styleguide/
+
+# 🛠️ Ferramentas de Build
+.grunt
+.gulp
+rollup.config.js.bak
+webpack.config.js.bak
+
+# 🎨 Design e Assets
+*.sketch
+*.fig
+*.xd
+design-tokens.json.bak
+assets/raw/
+!assets/optimized/
+
+# 🌍 Localização (exceto padrão)
+locales/generated/
+i18n/auto-generated/
+!locales/pt-BR/
+!locales/en/
+
+# 🔍 Search Index
+.search-index/
+algolia-index.json
+
+# 📞 Comunicação
+twilio-config.local.json
+socket-logs/
+chat-history/
 
 # Microbundle cache
 .rpt2_cache/

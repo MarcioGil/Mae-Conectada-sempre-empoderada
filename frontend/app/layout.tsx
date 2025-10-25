@@ -3,7 +3,12 @@
 import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import VoiceAssistant from '../components/VoiceAssistant'
+import SimpleVoiceButton from '../components/SimpleVoiceButton'
+import EmergencySystem from '../components/EmergencySystem'
+import DocumentCenter from '../components/DocumentCenter'
+import EducationalResources from '../components/EducationalResources'
+import CommunityChat from '../components/CommunityChat'
+import ViolenceProtection from '../components/ViolenceProtection'
 import AccessibilityPanel from '../components/AccessibilityPanel'
 import { AccessibilityProvider } from '../contexts/AccessibilityContext'
 
@@ -70,11 +75,50 @@ export default function RootLayout({
           {/* Conteúdo Principal */}
           <div id="app-container" className="min-h-screen flex flex-col">
             <main id="main-content" className="flex-1" role="main">
+              {/* Layout Principal com Funcionalidades Robustas */}
+              <div className="container mx-auto px-4 py-8 max-w-7xl">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                  
+                  {/* Coluna Principal */}
+                  <div className="lg:col-span-2 xl:col-span-2 space-y-8">
+                    {/* Proteção contra Violência */}
+                    <section className="bg-white rounded-xl shadow-lg overflow-hidden">
+                      <ViolenceProtection />
+                    </section>
+                    
+                    {/* Centro de Documentos */}
+                    <section className="bg-white rounded-xl shadow-lg overflow-hidden">
+                      <DocumentCenter />
+                    </section>
+                    
+                    {/* Recursos Educacionais */}
+                    <section className="bg-white rounded-xl shadow-lg overflow-hidden">
+                      <EducationalResources />
+                    </section>
+                  </div>
+
+                  {/* Sidebar */}
+                  <div className="xl:col-span-1 space-y-8">
+                    {/* Chat Comunitário */}
+                    <section className="bg-white rounded-xl shadow-lg overflow-hidden">
+                      <CommunityChat />
+                    </section>
+                  </div>
+                </div>
+              </div>
+              
               {children}
             </main>
             
+            {/* Sistema de Emergência - Posição Fixa */}
+            <div className="fixed bottom-4 left-4 z-50">
+              <EmergencySystem />
+            </div>
+            
             {/* Assistente de Voz - Sempre acessível */}
-            <VoiceAssistant />
+            <div className="fixed bottom-4 right-4 z-50 max-w-xs">
+              <SimpleVoiceButton />
+            </div>
           </div>
           
           {/* Anúncios para screen readers */}

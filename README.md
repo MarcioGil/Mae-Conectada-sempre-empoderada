@@ -162,8 +162,10 @@ Uma plataforma que **elimina barreiras** e **conecta mães** aos seus direitos, 
 
 ## 🚀 **DEPLOY E ACESSO**
 
-### 🌐 **Acesse Agora**
-**URL Principal**: [https://marciogil.github.io/Mae-Conecta/](https://marciogil.github.io/Mae-Conecta/)
+### 🌐 **Acesse Agora - Clara em Ação! 👩‍💻**
+**🔗 LINK DIRETO PARA DISTRIBUIÇÃO**: [https://marciogil.github.io/Mae-Conecta/](https://marciogil.github.io/Mae-Conecta/)
+
+**✨ Para Mulheres**: Clique no link, sem login, sem burocracia! A Clara te ajuda com voz feminina em português 💜
 
 ### 📱 **Como Instalar no Celular**
 1. **Acesse a URL** pelo navegador

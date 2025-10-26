@@ -128,6 +128,9 @@ export default function ClaraBasic() {
       case 'saude':
         responseMsg = '🏥 Sua saúde é prioridade, rainha! Você tem direito a: pré-natal completo, parto humanizado, acompanhante no parto, consultas de emergência, exames gratuitos no SUS. Se te maltrataram, DENUNCIE! Ouvidoria SUS 136. Sua vida e do seu bebê valem TUDO! Cuide-se com carinho! 💖';
         break;
+      case 'pensao':
+        responseMsg = '💰 PENSÃO ALIMENTÍCIA É DIREITO SEU E DO SEU FILHO! Escuta bem, guerreira: se o pai não paga, ELE TÁ COMETENDO CRIME! Passos: 1) Vá na Defensoria Pública (GRATUITO), 2) Leve certidão de nascimento e seus docs, 3) Eles entram com ação, 4) Juiz pode prender, bloquear conta, penhorar bens! Ele VAI PAGAR! Seu filho merece dignidade! 👑⚖️';
+        break;
       case 'emergencia':
         responseMsg = '🚨 EMERGÊNCIA! Se está em perigo AGORA: Ligue 190! Para violência doméstica: 180. Ameaça de feminicídio: 197. Se tem criança envolvida: 100 (Disque Denúncia). CORRE PARA UM LOCAL SEGURO! Você não está sozinha - toda a rede de proteção está aqui por você! SUA VIDA IMPORTA! 🆘';
         break;
@@ -221,6 +224,13 @@ export default function ClaraBasic() {
                   onClick={() => handleTopicClick('saude')}
                 >
                   🏥 Saúde & Bem-estar
+                </button>
+
+                <button
+                  className="w-full py-3 px-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white rounded-lg text-sm font-medium transition-all transform hover:scale-105"
+                  onClick={() => handleTopicClick('pensao')}
+                >
+                  💰 Pensão Alimentícia - Faça Ele Pagar!
                 </button>
 
                 <button

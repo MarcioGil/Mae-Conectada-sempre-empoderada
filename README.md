@@ -167,6 +167,11 @@ Uma plataforma que **elimina barreiras** e **conecta mães** aos seus direitos, 
 
 **✨ Para Mulheres**: Clique no link, sem login, sem burocracia! A Clara te ajuda com voz feminina em português 💜
 
+**📱 LINK FÁCIL DE COMPARTILHAR:**
+```
+https://marciogil.github.io/Mae-Conecta/
+```
+
 ### 📱 **Como Instalar no Celular**
 1. **Acesse a URL** pelo navegador
 2. **Menu do navegador** > "Adicionar à tela inicial"

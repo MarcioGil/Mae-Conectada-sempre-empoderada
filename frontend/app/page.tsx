@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useAccessibility } from '../contexts/AccessibilityContext'
 import Navigation from '../components/Navigation'
-import ModuleCard from '../components/ModuleCard'
+import ComplianceCard from '../components/ComplianceCard'
 import QuickActions from '../components/QuickActions'
 import WelcomeHero from '../components/WelcomeHero'
 
@@ -53,7 +53,7 @@ export default function HomePage() {
           <div className="grid-responsive">
             
             {/* Direitos Sem Medo */}
-            <ModuleCard
+            <ComplianceCard
               title="🛡 Direitos Sem Medo"
               description="Checklist do BPC, análise de documentos e relatórios automáticos para defensoria"
               href="/direitos"
@@ -68,7 +68,7 @@ export default function HomePage() {
             />
 
             {/* Conecta-Vagas Turbo */}
-            <ModuleCard
+            <ComplianceCard
               title="🧠 Conecta-Vagas Turbo"
               description="IA detecta suas habilidades invisíveis e encontra oportunidades perfeitas"
               href="/trabalho"
@@ -83,7 +83,7 @@ export default function HomePage() {
             />
 
             {/* Ninhos de Apoio 2.0 */}
-            <ModuleCard
+            <ComplianceCard
               title="👩‍👧‍👦 Ninhos de Apoio 2.0"
               description="Conecte-se com mães que vivem desafios similares aos seus"
               href="/comunidade"
@@ -98,7 +98,7 @@ export default function HomePage() {
             />
 
             {/* Academia da Mãe */}
-            <ModuleCard
+            <ComplianceCard
               title="📚 Academia da Mãe"
               description="Cursos rápidos que transformam habilidades em renda"
               href="/cursos"
@@ -113,7 +113,7 @@ export default function HomePage() {
             />
 
             {/* Jornada de Acolhimento */}
-            <ModuleCard
+            <ComplianceCard
               title="🧩 Jornada de Acolhimento"
               description="Conquiste seus direitos como um jogo, com recompensas reais"
               href="/jornada"
@@ -128,7 +128,7 @@ export default function HomePage() {
             />
 
             {/* Saúde da Infância */}
-            <ModuleCard
+            <ComplianceCard
               title="🏥 Saúde da Infância"
               description="Calendário inteligente para cuidar da saúde do seu filho"
               href="/saude"

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { navigateToRoute } from '../utils/routes';
+import { navigateToPageSafely } from '../utils/navigation';
 
 interface ModuleCardProps {
   title: string;
@@ -29,18 +29,8 @@ export default function ModuleCard({
 
   const handleClick = () => {
     if (href) {
-      // Verificação mais robusta para GitHub Pages
-      if (typeof window !== 'undefined' && 
-          (window.location.hostname.includes('github.io') || 
-           window.location.href.includes('Mae-Conecta'))) {
-        // Força navegação direta no GitHub Pages
-        const fullPath = href.startsWith('/Mae-Conecta') ? href : `/Mae-Conecta${href}`;
-        console.log('Navegando para GitHub Pages:', fullPath);
-        window.location.href = fullPath;
-      } else {
-        // Desenvolvimento local
-        router.push(href);
-      }
+      // Usar navegação super robusta para compliance total
+      navigateToPageSafely(href);
     } else if (onClick) {
       onClick();
     }

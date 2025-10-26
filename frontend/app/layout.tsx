@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ClaraBasic from '../components/ClaraBasic'
+import ClaraTest from '../components/ClaraTest'
 import { AccessibilityProvider } from '../contexts/AccessibilityContext'
 
 const inter = Inter({ 
@@ -27,7 +27,7 @@ export default function RootLayout({
             {children}
             
             {/* Clara - Assistente Virtual Empoderada */}
-            <ClaraBasic />
+            <ClaraTest />
             
             {/* Alert para screen readers */}
             <div 

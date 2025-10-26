@@ -8,19 +8,101 @@ export default function ClaraBasic() {
   const [currentTopic, setCurrentTopic] = useState('');
 
   const speakMessage = (text: string) => {
-    if ('speechSynthesis' in window) {
+    console.log('🎤 Clara tentando falar:', text);
+    
+    if (!('speechSynthesis' in window)) {
+      console.log('❌ SpeechSynthesis não suportado');
+      alert('Seu navegador não suporta síntese de voz. Mas posso te ajudar por texto! 💜');
+      return;
+    }
+
+    try {
       speechSynthesis.cancel(); // Para qualquer fala anterior
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'pt-BR';
-      utterance.rate = 0.8;
-      utterance.pitch = 1.1;
-      speechSynthesis.speak(utterance);
+      
+      // Aguardar as vozes carregarem
+      const setVoiceAndSpeak = () => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = speechSynthesis.getVoices();
+        
+        // Debug: Mostrar todas as vozes disponíveis
+        console.log('🎵 Todas as vozes disponíveis:', voices.map(v => ({
+          name: v.name,
+          lang: v.lang,
+          gender: v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('woman') || v.name.toLowerCase().includes('maria') || v.name.toLowerCase().includes('lucia') ? 'F' : 'M'
+        })));
+        
+        // Procurar por voz feminina em português - versão melhorada
+        const femaleVoice = voices.find(voice => 
+          voice.lang.includes('pt') && 
+          (voice.name.toLowerCase().includes('feminina') || 
+           voice.name.toLowerCase().includes('female') ||
+           voice.name.toLowerCase().includes('maria') ||
+           voice.name.toLowerCase().includes('lucia') ||
+           voice.name.toLowerCase().includes('woman') ||
+           voice.name.toLowerCase().includes('ana') ||
+           voice.name.toLowerCase().includes('helena') ||
+           voice.name.toLowerCase().includes('catarina'))
+        );
+        
+        // Se não encontrar, procurar qualquer voz em português
+        const portugueseVoice = voices.find(voice => voice.lang.includes('pt'));
+        
+        // Última tentativa: pegar vozes que não tenham palavras tipicamente masculinas
+        const nonMaleVoice = voices.find(voice => 
+          voice.lang.includes('pt') && 
+          !voice.name.toLowerCase().includes('carlos') &&
+          !voice.name.toLowerCase().includes('joão') &&
+          !voice.name.toLowerCase().includes('miguel') &&
+          !voice.name.toLowerCase().includes('male')
+        );
+        
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
+          console.log('👩 Usando voz feminina encontrada:', femaleVoice.name);
+        } else if (nonMaleVoice) {
+          utterance.voice = nonMaleVoice;
+          console.log('👩 Usando voz não-masculina:', nonMaleVoice.name);
+        } else if (portugueseVoice) {
+          utterance.voice = portugueseVoice;
+          console.log('🇧🇷 Usando voz portuguesa (pode ser masculina):', portugueseVoice.name);
+        } else {
+          console.log('⚠️ Nenhuma voz portuguesa encontrada, usando voz padrão');
+        }
+        
+        utterance.lang = 'pt-BR';
+        utterance.rate = 0.8; // Velocidade natural feminina
+        utterance.pitch = 1.5; // Bem mais agudo para soar feminino
+        utterance.volume = 0.9;
+        
+        utterance.onstart = () => console.log('🔊 Clara começou a falar');
+        utterance.onend = () => console.log('✅ Clara terminou de falar');
+        utterance.onerror = (e) => console.log('❌ Erro na fala:', e);
+        
+        speechSynthesis.speak(utterance);
+        console.log('💬 Comando de fala enviado com voz feminina');
+      };
+      
+      // Se as vozes ainda não carregaram, aguardar
+      if (speechSynthesis.getVoices().length === 0) {
+        speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+      } else {
+        setVoiceAndSpeak();
+      }
+      
+    } catch (error) {
+      console.log('🚨 Erro ao tentar falar:', error);
+      alert('Ops! Problema na síntese de voz. Mas posso te ajudar por texto! 💜');
     }
   };
 
   const handleClick = () => {
     setIsVisible(true);
     setCurrentTopic('inicio');
+    
+    // Debug: listar vozes disponíveis
+    const voices = speechSynthesis.getVoices();
+    console.log('🎭 Vozes disponíveis:', voices.map(v => `${v.name} (${v.lang})`));
+    
     const welcomeMsg = 'Oi, minha linda! 💜 Eu sou a Clara, sua companheira virtual. Estou aqui para te empoderar, te proteger e lutar ao seu lado. Você nunca está sozinha! Como posso te ajudar hoje?';
     setMessage(welcomeMsg);
     speakMessage(welcomeMsg);

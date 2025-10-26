@@ -1,7 +1,7 @@
 {
   "name": "Mãe Conecta - Empoderamento através da tecnologia",
   "short_name": "Mãe Conecta",
-  "description": "Plataforma de apoio e empoderamento para mães e cuidadores com recursos de voz, assistência inteligente e comunidade inclusiva.",
+  "description": "Plataforma de apoio e empoderamento para mães brasileiras com IA, GPS de emergência e comunidade segura.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -9,7 +9,65 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "pt-BR",
-  "categories": ["social", "lifestyle", "education"],
+  "categories": ["social", "lifestyle", "education", "health"],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "shortcuts": [
+    {
+      "name": "🆘 Emergência",
+      "short_name": "Emergência",
+      "description": "Acesso rápido para situações de emergência",
+      "url": "/emergencia",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "💬 Clara IA",
+      "short_name": "Clara",
+      "description": "Converse com a assistente virtual Clara",
+      "url": "/?clara=true",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png", 
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "🛡️ Direitos",
+      "short_name": "Direitos",
+      "description": "Seus direitos e benefícios sociais",
+      "url": "/direitos",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96", 
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "💼 Trabalho",
+      "short_name": "Vagas",
+      "description": "Oportunidades de trabalho e renda",
+      "url": "/trabalho",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
   "icons": [
     {
       "src": "/icons/icon-72x72.png",
@@ -59,51 +117,5 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
-  ],
-  "shortcuts": [
-    {
-      "name": "Direitos Sem Medo",
-      "short_name": "Direitos",
-      "description": "Acesse rapidamente seus direitos e benefícios",
-      "url": "/direitos",
-      "icons": [
-        {
-          "src": "/icons/shortcut-direitos.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "Conecta-Vagas",
-      "short_name": "Trabalho",
-      "description": "Encontre oportunidades de trabalho",
-      "url": "/trabalho",
-      "icons": [
-        {
-          "src": "/icons/shortcut-trabalho.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "Assistente Clara",
-      "short_name": "Clara",
-      "description": "Fale com a assistente de voz",
-      "url": "/?voice=true",
-      "icons": [
-        {
-          "src": "/icons/shortcut-clara.png",
-          "sizes": "96x96"
-        }
-      ]
-    }
-  ],
-  "features": [
-    "voice-recognition",
-    "offline-support",
-    "push-notifications",
-    "accessibility"
-  ],
-  "prefer_related_applications": false,
-  "iarc_rating_id": ""
+  ]
 }

@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ClaraBasic from '../components/ClaraBasic'
+import ClientWrapper from '../components/ClientWrapper'
 import { AccessibilityProvider } from '../contexts/AccessibilityContext'
 
 const inter = Inter({ 
@@ -26,8 +26,7 @@ export default function RootLayout({
           <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
             {children}
             
-            {/* Clara - Assistente Virtual Empoderada */}
-            <ClaraBasic />
+            <ClientWrapper />
             
             {/* Alert para screen readers */}
             <div 

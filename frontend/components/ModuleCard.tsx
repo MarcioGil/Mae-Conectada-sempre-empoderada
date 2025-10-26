@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ModuleCardProps {
   title: string;
@@ -23,9 +24,11 @@ export default function ModuleCard({
   onClick, 
   className = '' 
 }: ModuleCardProps) {
+  const router = useRouter();
+
   const handleClick = () => {
     if (href) {
-      window.location.href = href;
+      router.push(href);
     } else if (onClick) {
       onClick();
     }

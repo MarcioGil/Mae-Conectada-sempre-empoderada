@@ -13,30 +13,38 @@ export default function EmergenciaSimples() {
   }, []);
 
   const handleEmergencyCall = (number: string, description: string) => {
+    // Prevenir múltiplas chamadas
+    if (alertSent) return;
+    
     setAlertSent(true);
     
     // Detectar se é mobile ou desktop
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    if (isMobile) {
-      // No celular: liga diretamente
-      window.location.href = `tel:${number}`;
+    if (isMobileDevice) {
+      // No celular: tentar ligar uma vez apenas
+      try {
+        window.location.href = `tel:${number}`;
+      } catch (error) {
+        alert(`📞 Discue manualmente: ${number} (${description})`);
+      }
     } else {
-      // No desktop: mostra o número para discar
+      // No desktop: copiar número
       const confirmCall = confirm(`📞 EMERGÊNCIA!\n\nNúmero: ${number} (${description})\n\nNo computador, você precisa discar manualmente.\nClique OK para copiar o número.`);
       
-      if (confirmCall) {
-        // Copiar número para clipboard
+      if (confirmCall && navigator.clipboard) {
         navigator.clipboard.writeText(number).then(() => {
           alert(`✅ Número ${number} copiado!\nDiscue agora no seu celular.`);
         }).catch(() => {
           alert(`📞 Discue agora: ${number} (${description})`);
         });
+      } else if (confirmCall) {
+        alert(`📞 Discue agora: ${number} (${description})`);
       }
     }
     
-    // Reset após alguns segundos
-    setTimeout(() => setAlertSent(false), 3000);
+    // Reset após 5 segundos (tempo maior para evitar conflitos)
+    setTimeout(() => setAlertSent(false), 5000);
   };
 
   const sendWhatsAppAlert = () => {
@@ -81,28 +89,43 @@ Horário: ${new Date().toLocaleString('pt-BR')}`;
           {/* Polícia */}
           <button
             onClick={() => handleEmergencyCall('190', 'Polícia Militar')}
-            className="w-full bg-red-600 hover:bg-red-700 text-white p-6 rounded-lg font-bold text-xl flex items-center justify-center space-x-4 transition-all transform hover:scale-105"
+            disabled={alertSent}
+            className={`w-full p-6 rounded-lg font-bold text-xl flex items-center justify-center space-x-4 transition-all transform hover:scale-105 ${
+              alertSent 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-red-600 hover:bg-red-700 text-white'
+            }`}
           >
             <span className="text-3xl">🚔</span>
-            <span>190 - POLÍCIA MILITAR</span>
+            <span>{alertSent ? 'CHAMANDO...' : '190 - POLÍCIA MILITAR'}</span>
           </button>
 
           {/* Central da Mulher */}
           <button
             onClick={() => handleEmergencyCall('180', 'Central da Mulher')}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white p-6 rounded-lg font-bold text-xl flex items-center justify-center space-x-4 transition-all transform hover:scale-105"
+            disabled={alertSent}
+            className={`w-full p-6 rounded-lg font-bold text-xl flex items-center justify-center space-x-4 transition-all transform hover:scale-105 ${
+              alertSent 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-purple-600 hover:bg-purple-700 text-white'
+            }`}
           >
             <span className="text-3xl">👩‍⚖️</span>
-            <span>180 - CENTRAL DA MULHER</span>
+            <span>{alertSent ? 'CHAMANDO...' : '180 - CENTRAL DA MULHER'}</span>
           </button>
 
           {/* SAMU */}
           <button
             onClick={() => handleEmergencyCall('192', 'SAMU')}
-            className="w-full bg-green-600 hover:bg-green-700 text-white p-6 rounded-lg font-bold text-xl flex items-center justify-center space-x-4 transition-all transform hover:scale-105"
+            disabled={alertSent}
+            className={`w-full p-6 rounded-lg font-bold text-xl flex items-center justify-center space-x-4 transition-all transform hover:scale-105 ${
+              alertSent 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-green-600 hover:bg-green-700 text-white'
+            }`}
           >
             <span className="text-3xl">🚑</span>
-            <span>192 - SAMU</span>
+            <span>{alertSent ? 'CHAMANDO...' : '192 - SAMU'}</span>
           </button>
 
           {/* WhatsApp de Emergência */}

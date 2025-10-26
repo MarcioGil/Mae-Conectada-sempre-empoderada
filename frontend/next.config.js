@@ -20,11 +20,13 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
-  // Configuração para GitHub Pages
-  output: 'export',
-  basePath: '/Mae-Conecta',
-  assetPrefix: '/Mae-Conecta/',
-  trailingSlash: true,
+  // Configuração dinâmica baseada no ambiente
+  ...(process.env.NODE_ENV === 'production' && process.env.GITHUB_PAGES ? {
+    output: 'export',
+    basePath: '/Mae-Conecta',
+    assetPrefix: '/Mae-Conecta/',
+    trailingSlash: true,
+  } : {}),
   images: {
     unoptimized: true,
     domains: ['localhost'],

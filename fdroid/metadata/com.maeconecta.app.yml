@@ -1,0 +1,66 @@
+Categories:
+  - Internet
+  - Education
+  - Science & Education
+License: MIT
+AuthorName: Mãe Conecta Team
+AuthorEmail: contato@maeconecta.com.br
+WebSite: https://marciogil.github.io/Mae-Conecta/
+SourceCode: https://github.com/MarcioGil/Mae-Conecta
+IssueTracker: https://github.com/MarcioGil/Mae-Conecta/issues
+Translation: https://github.com/MarcioGil/Mae-Conecta/pulls
+Changelog: https://github.com/MarcioGil/Mae-Conecta/releases
+
+AutoName: Mãe Conecta
+Summary: Empoderamento digital para mães brasileiras
+
+Description: |
+    Plataforma completa de empoderamento para mães brasileiras através da tecnologia.
+    
+    '''Recursos Principais:'''
+    
+    * '''Clara IA''': Assistente virtual especializada em empoderamento feminino com respostas em português e voz feminina
+    * '''Sistema de Emergência GPS''': Localização automática em tempo real com contatos de emergência (190, 180, 192) e compartilhamento via WhatsApp
+    * '''Módulos Educacionais''': Conteúdo sobre direitos da mulher, capacitação profissional, saúde mental, tecnologia e segurança
+    * '''Comunidade Segura''': Espaço moderado para networking e apoio mútuo entre mães
+    * '''Segurança e Privacidade''': Todos os dados ficam apenas no dispositivo da usuária
+    
+    '''Diferenciais:'''
+    
+    * 100% gratuito e sem anúncios
+    * Funciona offline após instalação
+    * Interface amigável e acessível
+    * Suporte a deficientes visuais
+    * Desenvolvido especificamente para o contexto brasileiro
+    
+    '''Público-alvo:'''
+    
+    * Mães que buscam empoderamento pessoal e profissional
+    * Mulheres em situação de vulnerabilidade
+    * Empreendedoras iniciantes
+    * Profissionais em desenvolvimento
+    * Qualquer mulher que deseja crescer e se conectar
+    
+    O Mãe Conecta é um projeto de tecnologia social que visa democratizar o acesso ao conhecimento e ferramentas de empoderamento através de um aplicativo web progressivo (PWA) moderno e inclusivo.
+    
+    '''Missão Social:'''
+    Empoderar mães brasileiras através da tecnologia, oferecendo suporte prático para o desenvolvimento pessoal, profissional e comunitário.
+
+RepoType: git
+Repo: https://github.com/MarcioGil/Mae-Conecta
+Binaries: https://marciogil.github.io/Mae-Conecta/
+
+Builds:
+  - versionName: '1.0.0'
+    versionCode: 1
+    commit: main
+    subdir: frontend
+    sudo:
+      - apt-get update
+      - apt-get install -y nodejs npm
+    init: npm install
+    build: npm run build
+    output: dist/
+    
+CurrentVersion: '1.0.0'
+CurrentVersionCode: 1

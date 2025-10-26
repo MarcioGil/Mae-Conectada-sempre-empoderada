@@ -2,25 +2,26 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { navigateToRoute } from '../utils/routes';
 
 export default function Navigation() {
   const router = useRouter();
 
   const handleNavigation = (route: string) => {
     if (route === 'inicio') {
-      router.push('/');
+      navigateToRoute(router, '/');
     } else if (route === 'recursos') {
       // Scroll para os módulos se estiver na página inicial
       const modulesSection = document.getElementById('modules-title');
       if (modulesSection) {
         modulesSection.scrollIntoView({ behavior: 'smooth' });
       } else {
-        router.push('/#modules-title');
+        navigateToRoute(router, '/#modules-title');
       }
     } else if (route === 'comunidade') {
-      router.push('/comunidade');
+      navigateToRoute(router, '/comunidade');
     } else if (route === 'ajuda') {
-      router.push('/emergencia');
+      navigateToRoute(router, '/emergencia');
     }
   };
 

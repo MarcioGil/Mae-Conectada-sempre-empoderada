@@ -1,64 +1,132 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { getCurrentLocation, requestLocationPermission, EmergencyLocationResult } from '../services/geolocation';
 
 export default function EmergenciaSimples() {
   const [alertSent, setAlertSent] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [locationData, setLocationData] = useState<EmergencyLocationResult | null>(null);
+  const [gpsStatus, setGpsStatus] = useState<'checking' | 'available' | 'denied' | 'unavailable'>('checking');
 
-  // Detectar dispositivo
+  // Detectar dispositivo e solicitar permissão de GPS
   useEffect(() => {
     const checkMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     setIsMobile(checkMobile);
+
+    // Solicitar permissão de GPS antecipadamente
+    checkGPSPermission();
   }, []);
 
-  const handleEmergencyCall = (number: string, description: string) => {
+  const checkGPSPermission = async () => {
+    const hasPermission = await requestLocationPermission();
+    setGpsStatus(hasPermission ? 'available' : 'denied');
+  };
+
+  const getLocationForEmergency = async () => {
+    setGpsStatus('checking');
+    const result = await getCurrentLocation();
+    setLocationData(result);
+    setGpsStatus(result.success ? 'available' : 'unavailable');
+    return result;
+  };
+
+  const handleEmergencyCall = async (number: string, description: string) => {
     // Prevenir múltiplas chamadas
     if (alertSent) return;
     
     setAlertSent(true);
     
+    // Tentar obter localização primeiro
+    const locationResult = await getLocationForEmergency();
+    
     // Detectar se é mobile ou desktop
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
+    let emergencyMessage = `🚨 EMERGÊNCIA: ${description}`;
+    
+    if (locationResult.success && locationResult.location) {
+      emergencyMessage += `\n\n📍 LOCALIZAÇÃO:\nLat: ${locationResult.location.latitude.toFixed(6)}\nLong: ${locationResult.location.longitude.toFixed(6)}\n🗺️ ${locationResult.googleMapsUrl}`;
+    } else {
+      emergencyMessage += `\n\n⚠️ Localização não disponível: ${locationResult.message}`;
+    }
+    
     if (isMobileDevice) {
-      // No celular: tentar ligar uma vez apenas
+      // No celular: tentar ligar
       try {
+        // Mostrar localização antes da ligação
+        if (locationResult.success) {
+          alert(emergencyMessage);
+        }
         window.location.href = `tel:${number}`;
       } catch (error) {
-        alert(`📞 Discue manualmente: ${number} (${description})`);
+        alert(`📞 Discue manualmente: ${number}\n\n${emergencyMessage}`);
       }
     } else {
-      // No desktop: copiar número
-      const confirmCall = confirm(`📞 EMERGÊNCIA!\n\nNúmero: ${number} (${description})\n\nNo computador, você precisa discar manualmente.\nClique OK para copiar o número.`);
+      // No desktop: copiar número e localização
+      const confirmCall = confirm(`${emergencyMessage}\n\nClique OK para copiar o número ${number}`);
       
       if (confirmCall && navigator.clipboard) {
-        navigator.clipboard.writeText(number).then(() => {
-          alert(`✅ Número ${number} copiado!\nDiscue agora no seu celular.`);
+        const textToCopy = locationResult.success 
+          ? `${number}\n\nLocalização: ${locationResult.location!.latitude.toFixed(6)}, ${locationResult.location!.longitude.toFixed(6)}\nMapa: ${locationResult.googleMapsUrl}`
+          : `${number}\n\nEmergência: ${description}`;
+          
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          alert(`✅ Dados copiados!\nDiscue ${number} no seu celular.`);
         }).catch(() => {
-          alert(`📞 Discue agora: ${number} (${description})`);
+          alert(`📞 Discue agora: ${number}\n\n${emergencyMessage}`);
         });
       } else if (confirmCall) {
-        alert(`📞 Discue agora: ${number} (${description})`);
+        alert(`📞 Discue agora: ${number}\n\n${emergencyMessage}`);
       }
     }
     
-    // Reset após 5 segundos (tempo maior para evitar conflitos)
+    // Reset após 5 segundos
     setTimeout(() => setAlertSent(false), 5000);
   };
 
-  const sendWhatsAppAlert = () => {
-    const message = `🆘 EMERGÊNCIA! Preciso de ajuda urgente! 
+  const sendWhatsAppAlert = async () => {
+    if (alertSent) return;
     
-📍 Por favor me localize ou chame as autoridades:
+    setAlertSent(true);
+    
+    // Obter localização para o WhatsApp
+    const locationResult = await getLocationForEmergency();
+    
+    let message = `🆘 EMERGÊNCIA! 🆘
+Preciso de ajuda urgente!
+
+👤 Usuária do Mãe Conecta
+⏰ ${new Date().toLocaleString('pt-BR')}`;
+
+    if (locationResult.success && locationResult.whatsappMessage) {
+      message = locationResult.whatsappMessage;
+    } else {
+      message += `\n\n⚠️ Localização não disponível: ${locationResult.message}
+
+� Por favor me localize ou chame as autoridades:
 • 190 - Polícia
 • 180 - Central da Mulher  
-• 192 - SAMU
-
-Horário: ${new Date().toLocaleString('pt-BR')}`;
+• 192 - SAMU`;
+    }
 
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    
+    try {
+      window.open(whatsappUrl, '_blank');
+      alert('✅ WhatsApp aberto! Selecione um contato para enviar sua localização de emergência.');
+    } catch (error) {
+      // Fallback: copiar mensagem
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(message).then(() => {
+          alert('📋 Mensagem de emergência copiada! Cole em qualquer app de mensagens.');
+        });
+      } else {
+        alert(`📋 Copie esta mensagem de emergência:\n\n${message}`);
+      }
+    }
+    
+    setTimeout(() => setAlertSent(false), 5000);
   };
 
   return (
@@ -71,6 +139,28 @@ Horário: ${new Date().toLocaleString('pt-BR')}`;
           <h1 className="text-2xl font-bold mb-2">CENTRAL DE EMERGÊNCIA</h1>
           <p className="text-red-100">Você não está sozinha. Ajuda está a caminho!</p>
           
+          {/* Status do GPS */}
+          <div className="mt-4 p-3 rounded-lg" style={{
+            backgroundColor: gpsStatus === 'available' ? '#10B981' : 
+                           gpsStatus === 'checking' ? '#F59E0B' : '#EF4444'
+          }}>
+            {gpsStatus === 'checking' && (
+              <>
+                <div className="animate-spin inline-block w-4 h-4 border-2 border-white rounded-full border-t-transparent mr-2"></div>
+                📡 Verificando GPS...
+              </>
+            )}
+            {gpsStatus === 'available' && (
+              <>📍 GPS Ativo - Localização será enviada automaticamente</>
+            )}
+            {gpsStatus === 'denied' && (
+              <>⚠️ GPS Negado - Ative nas configurações para maior segurança</>
+            )}
+            {gpsStatus === 'unavailable' && (
+              <>❌ GPS Indisponível - Chamadas ainda funcionam</>
+            )}
+          </div>
+          
           {/* Indicador de dispositivo */}
           {isMobile ? (
             <div className="mt-4 bg-green-500 text-white px-4 py-2 rounded">
@@ -82,6 +172,45 @@ Horário: ${new Date().toLocaleString('pt-BR')}`;
             </div>
           )}
         </div>
+
+        {/* Teste de GPS */}
+        {gpsStatus !== 'available' && (
+          <div className="mb-6">
+            <button
+              onClick={checkGPSPermission}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-all transform hover:scale-105 flex items-center justify-center space-x-3"
+            >
+              <span className="text-2xl">📡</span>
+              <span>ATIVAR GPS PARA EMERGÊNCIAS</span>
+            </button>
+            <p className="text-sm text-gray-600 mt-2 text-center">
+              Recomendado: Ative a localização para que os socorristas possam te encontrar mais rapidamente
+            </p>
+          </div>
+        )}
+
+        {/* Informações da localização atual */}
+        {locationData && locationData.success && (
+          <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
+            <h3 className="font-bold text-green-800 mb-2">📍 Sua Localização Atual:</h3>
+            <p className="text-sm text-green-700">
+              Coordenadas: {locationData.location!.latitude.toFixed(6)}, {locationData.location!.longitude.toFixed(6)}
+            </p>
+            <p className="text-sm text-green-700">
+              Precisão: ~{Math.round(locationData.location!.accuracy)}m
+            </p>
+            {locationData.googleMapsUrl && (
+              <a 
+                href={locationData.googleMapsUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm underline"
+              >
+                🗺️ Ver no Google Maps
+              </a>
+            )}
+          </div>
+        )}
 
         {/* Botões de Emergência */}
         <div className="space-y-4">

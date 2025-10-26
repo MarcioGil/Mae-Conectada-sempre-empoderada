@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { navigateToRoute } from '../utils/routes';
 
 interface ModuleCardProps {
   title: string;
@@ -28,7 +29,7 @@ export default function ModuleCard({
 
   const handleClick = () => {
     if (href) {
-      router.push(href);
+      navigateToRoute(router, href);
     } else if (onClick) {
       onClick();
     }

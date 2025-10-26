@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { navigateToRoute } from '../utils/routes';
 
 export default function QuickActions() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function QuickActions() {
     { 
       icon: '🚨', 
       label: 'Emergência', 
-      action: () => router.push('/emergencia')
+      action: () => navigateToRoute(router, '/emergencia')
     },
     { 
       icon: '💬', 

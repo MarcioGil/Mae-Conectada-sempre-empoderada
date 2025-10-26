@@ -20,7 +20,13 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
+  // Configuração para GitHub Pages
+  output: 'export',
+  basePath: '/Mae-Conecta',
+  assetPrefix: '/Mae-Conecta/',
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     domains: ['localhost'],
     formats: ['image/webp', 'image/avif'],
   },
@@ -32,15 +38,6 @@ const nextConfig = {
   // PWA e Acessibilidade
   poweredByHeader: false,
   reactStrictMode: true,
-  // Configuração otimizada para Vercel
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
-  },
 };
 
 module.exports = withPWA(nextConfig);

@@ -1,0 +1,109 @@
+{
+  "name": "Mãe Conecta - Empoderamento através da tecnologia",
+  "short_name": "Mãe Conecta",
+  "description": "Plataforma de apoio e empoderamento para mães e cuidadores com recursos de voz, assistência inteligente e comunidade inclusiva.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d433ff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "categories": ["social", "lifestyle", "education"],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Direitos Sem Medo",
+      "short_name": "Direitos",
+      "description": "Acesse rapidamente seus direitos e benefícios",
+      "url": "/direitos",
+      "icons": [
+        {
+          "src": "/icons/shortcut-direitos.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Conecta-Vagas",
+      "short_name": "Trabalho",
+      "description": "Encontre oportunidades de trabalho",
+      "url": "/trabalho",
+      "icons": [
+        {
+          "src": "/icons/shortcut-trabalho.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Assistente Clara",
+      "short_name": "Clara",
+      "description": "Fale com a assistente de voz",
+      "url": "/?voice=true",
+      "icons": [
+        {
+          "src": "/icons/shortcut-clara.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "features": [
+    "voice-recognition",
+    "offline-support",
+    "push-notifications",
+    "accessibility"
+  ],
+  "prefer_related_applications": false,
+  "iarc_rating_id": ""
+}

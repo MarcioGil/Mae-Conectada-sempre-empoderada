@@ -1,13 +1,39 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function QuickActions() {
+  const router = useRouter();
+
   const actions = [
-    { icon: '🚨', label: 'Emergência', action: () => alert('Chamando emergência...') },
-    { icon: '💬', label: 'Chat Clara', action: () => console.log('Abrir chat Clara') },
-    { icon: '📞', label: 'Suporte', action: () => alert('Ligando para suporte...') },
-    { icon: '📚', label: 'Guias', action: () => console.log('Abrir guias') }
+    { 
+      icon: '🚨', 
+      label: 'Emergência', 
+      action: () => router.push('/emergencia')
+    },
+    { 
+      icon: '💬', 
+      label: 'Chat Clara', 
+      action: () => {
+        // A Clara já está disponível no botão flutuante
+        alert('💜 A Clara está no botão roxo no canto da tela! Clique nela para conversar.');
+      }
+    },
+    { 
+      icon: '📞', 
+      label: 'Suporte', 
+      action: () => {
+        const message = `💜 Preciso de ajuda com o Mãe Conecta`;
+        const whatsapp = `https://wa.me/5521964949427?text=${encodeURIComponent(message)}`;
+        window.open(whatsapp, '_blank');
+      }
+    },
+    { 
+      icon: '📚', 
+      label: 'Guias', 
+      action: () => router.push('/educacao')
+    }
   ];
 
   return (

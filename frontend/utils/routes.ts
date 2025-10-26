@@ -4,7 +4,7 @@
 
 // Detecta se estamos no GitHub Pages
 export const isGitHubPages = typeof window !== 'undefined' && 
-  window.location.hostname === 'marciogil.github.io';
+  (window.location.hostname === 'marciogil.github.io' || window.location.href.includes('github.io'));
 
 // Base path do GitHub Pages
 export const basePath = isGitHubPages ? '/Mae-Conecta' : '';
@@ -21,7 +21,12 @@ export function createRoute(path: string): string {
   }
   
   // Adiciona basePath se estiver no GitHub Pages
-  return `${basePath}${path}`;
+  if (typeof window !== 'undefined' && 
+      (window.location.hostname === 'marciogil.github.io' || window.location.href.includes('github.io'))) {
+    return `/Mae-Conecta${path}`;
+  }
+  
+  return path;
 }
 
 /**
@@ -30,9 +35,12 @@ export function createRoute(path: string): string {
  * @param path - Caminho da rota
  */
 export function navigateToRoute(router: any, path: string): void {
-  if (isGitHubPages) {
-    // No GitHub Pages, usa window.location para garantir funcionamento
-    window.location.href = createRoute(path);
+  // Força window.location no GitHub Pages para garantir funcionamento
+  if (typeof window !== 'undefined' && 
+      (window.location.hostname === 'marciogil.github.io' || window.location.href.includes('github.io'))) {
+    const fullPath = createRoute(path);
+    console.log('Navegando para:', fullPath); // Debug
+    window.location.href = fullPath;
   } else {
     // Em desenvolvimento, usa router.push
     router.push(path);

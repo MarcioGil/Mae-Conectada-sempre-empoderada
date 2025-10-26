@@ -29,7 +29,18 @@ export default function ModuleCard({
 
   const handleClick = () => {
     if (href) {
-      navigateToRoute(router, href);
+      // Verificação mais robusta para GitHub Pages
+      if (typeof window !== 'undefined' && 
+          (window.location.hostname.includes('github.io') || 
+           window.location.href.includes('Mae-Conecta'))) {
+        // Força navegação direta no GitHub Pages
+        const fullPath = href.startsWith('/Mae-Conecta') ? href : `/Mae-Conecta${href}`;
+        console.log('Navegando para GitHub Pages:', fullPath);
+        window.location.href = fullPath;
+      } else {
+        // Desenvolvimento local
+        router.push(href);
+      }
     } else if (onClick) {
       onClick();
     }

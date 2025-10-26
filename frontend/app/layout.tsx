@@ -10,8 +10,22 @@ const inter = Inter({
 })
 
 export const metadata = {
-  title: '🤱 Mãe Conecta - Plataforma de Apoio e Empoderamento',
-  description: 'Plataforma completa de apoio e empoderamento para mães brasileiras',
+  title: 'Mãe Conecta - Empoderamento Digital para Mães Brasileiras',
+  description: 'Plataforma completa de apoio e empoderamento para mães brasileiras com IA Clara, GPS de emergência e comunidade segura. 100% gratuito!',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/icons/icon-192x192.png',
+    apple: '/icons/icon-192x192.png',
+  },
+}
+
+export const viewport = {
+  themeColor: '#d433ff',
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover'
 }
 
 export default function RootLayout({
@@ -21,6 +35,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#d433ff" />
+        <meta name="background-color" content="#ffffff" />
+        <meta name="display" content="standalone" />
+        <meta name="orientation" content="portrait" />
+        <link rel="icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Mãe Conecta" />
+      </head>
       <body className={inter.variable}>
         <AccessibilityProvider>
           <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">

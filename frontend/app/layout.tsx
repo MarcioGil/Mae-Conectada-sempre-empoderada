@@ -12,10 +12,10 @@ const inter = Inter({
 export const metadata = {
   title: 'Mãe Conecta - Empoderamento Digital para Mães Brasileiras',
   description: 'Plataforma completa de apoio e empoderamento para mães brasileiras com IA Clara, GPS de emergência e comunidade segura. 100% gratuito!',
-  manifest: '/manifest.json',
+  manifest: '/Mae-Conecta/manifest.json',
   icons: {
-    icon: '/icons/icon-192x192.png',
-    apple: '/icons/icon-192x192.png',
+    icon: '/Mae-Conecta/icons/icon-192x192.png',
+    apple: '/Mae-Conecta/icons/icon-192x192.png',
   },
 }
 
@@ -36,13 +36,13 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/Mae-Conecta/manifest.json" />
         <meta name="theme-color" content="#d433ff" />
         <meta name="background-color" content="#ffffff" />
         <meta name="display" content="standalone" />
         <meta name="orientation" content="portrait" />
-        <link rel="icon" href="/icons/icon-192x192.png" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="icon" href="/Mae-Conecta/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/Mae-Conecta/icons/icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Mãe Conecta" />

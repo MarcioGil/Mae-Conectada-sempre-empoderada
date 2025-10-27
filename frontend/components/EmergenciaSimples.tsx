@@ -19,16 +19,36 @@ export default function EmergenciaSimples() {
   }, []);
 
   const checkGPSPermission = async () => {
-    const hasPermission = await requestLocationPermission();
-    setGpsStatus(hasPermission ? 'available' : 'denied');
+    try {
+      const hasPermission = await requestLocationPermission();
+      setGpsStatus(hasPermission ? 'available' : 'denied');
+      if (!hasPermission) {
+        alert('Permissão de localização negada. Ative o GPS nas configurações do seu dispositivo e recarregue a página.');
+      }
+    } catch (e) {
+      setGpsStatus('unavailable');
+      alert('Erro ao solicitar permissão de localização. Tente recarregar a página ou usar outro navegador.');
+      console.error('Erro ao solicitar permissão de localização:', e);
+    }
   };
 
   const getLocationForEmergency = async () => {
     setGpsStatus('checking');
-    const result = await getCurrentLocation();
-    setLocationData(result);
-    setGpsStatus(result.success ? 'available' : 'unavailable');
-    return result;
+    try {
+      const result = await getCurrentLocation();
+      setLocationData(result);
+      setGpsStatus(result.success ? 'available' : 'unavailable');
+      if (!result.success) {
+        alert('Não foi possível obter sua localização: ' + result.message + '\n\nDicas:\n- Ative o GPS do seu dispositivo\n- Permita o acesso à localização no navegador\n- Use HTTPS e recarregue a página');
+        console.warn('Falha ao obter localização:', result.message);
+      }
+      return result;
+    } catch (e) {
+      setGpsStatus('unavailable');
+      alert('Erro inesperado ao obter localização. Tente recarregar a página ou usar outro navegador.');
+      console.error('Erro inesperado ao obter localização:', e);
+      return { success: false, message: 'Erro inesperado ao obter localização.' };
+    }
   };
 
   const handleEmergencyCall = async (number: string, description: string) => {
@@ -184,7 +204,10 @@ Preciso de ajuda urgente!
               <span>ATIVAR GPS PARA EMERGÊNCIAS</span>
             </button>
             <p className="text-sm text-gray-600 mt-2 text-center">
-              Recomendado: Ative a localização para que os socorristas possam te encontrar mais rapidamente
+              Recomendado: Ative a localização para que os socorristas possam te encontrar mais rapidamente.<br/>
+              <b>Dicas:</b> Ative o GPS, permita localização no navegador, use HTTPS e recarregue a página.<br/>
+              Se continuar com problemas, tente outro navegador ou dispositivo.<br/>
+              <span style={{color:'#b91c1c'}}>Se aparecer "GPS Negado" ou "Indisponível", verifique as permissões do navegador.</span>
             </p>
           </div>
         )}

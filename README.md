@@ -8,6 +8,12 @@
 
 ---
 
+## 🚀 Acesse o aplicativo em produção
+
+👉 **[Clique aqui para acessar o Mãe Conecta em funcionamento](https://marciogil.github.io/Mae-Conecta/)**
+
+---
+
 ## � Resumo Rápido (versão compacta)
 
 Uma plataforma PWA focada em empoderar mães com acessibilidade, comunidade e recursos práticos. Principais pontos em 3 linhas:

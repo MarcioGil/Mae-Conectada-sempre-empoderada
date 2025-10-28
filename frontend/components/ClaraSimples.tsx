@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-export default function ClaraSimples() {
+export default function AnaLyzSimples() {
   const [isVisible, setIsVisible] = useState(false);
 
   const falar = (texto: string) => {
@@ -10,8 +10,24 @@ export default function ClaraSimples() {
       if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(texto);
         utterance.lang = 'pt-BR';
-        speechSynthesis.speak(utterance);
-        console.log('Falando:', texto);
+        const voices = window.speechSynthesis.getVoices();
+        // Lista de nomes de vozes femininas populares em pt-BR
+        const nomesFemininos = [
+          'luciana', 'camila', 'vitoria', 'maria', 'fernanda', 'br-female', 'female', 'mulher', 'google português do brasil', 'pt-br'
+        ];
+        // Tenta encontrar voz feminina por nome
+        let vozFeminina = voices.find(v => v.lang.toLowerCase().startsWith('pt') && nomesFemininos.some(nome => v.name.toLowerCase().includes(nome)));
+        // Se não achar, pega qualquer voz pt-BR
+        if (!vozFeminina) {
+          vozFeminina = voices.find(v => v.lang === 'pt-BR');
+        }
+        // Se ainda não achar, pega qualquer voz pt
+        if (!vozFeminina) {
+          vozFeminina = voices.find(v => v.lang.toLowerCase().startsWith('pt'));
+        }
+        utterance.voice = vozFeminina || null;
+        window.speechSynthesis.speak(utterance);
+        console.log('Falando:', texto, utterance.voice);
       } else {
         console.log('Síntese de voz não suportada');
       }
@@ -21,18 +37,18 @@ export default function ClaraSimples() {
   };
 
   const abrirChat = () => {
-    console.log('Abrindo chat da Clara');
+  console.log('Abrindo chat da Ana Lyz');
     setIsVisible(true);
-    falar('Oi minha linda! Eu sou a Clara, sua companheira virtual!');
+  falar('Oi minha linda! Eu sou a Ana Lyz, sua companheira virtual!');
   };
 
   const fecharChat = () => {
-    console.log('Fechando chat da Clara');
+  console.log('Fechando chat da Ana Lyz');
     setIsVisible(false);
   };
 
   const testarFala = () => {
-    console.log('Testando fala da Clara');
+  console.log('Testando fala da Ana Lyz');
     falar('Teste de fala! Você está me ouvindo?');
   };
 
@@ -68,7 +84,7 @@ export default function ClaraSimples() {
         }}
       >
         👩‍⚕️<br/>
-        <small style={{fontSize: '10px'}}>CLARA</small>
+  <small style={{fontSize: '10px'}}>ANA LYZ</small>
       </button>
 
       {/* Modal do chat */}
@@ -107,7 +123,7 @@ export default function ClaraSimples() {
               margin: '-24px -24px 20px -24px'
             }}>
               <div>
-                <h3 style={{margin: 0}}>👩‍⚕️ Clara - Sua Guerreira Digital</h3>
+                <h3 style={{margin: 0}}>👩‍⚕️ Ana Lyz - Sua Guerreira Digital</h3>
               </div>
               <button
                 onClick={fecharChat}
@@ -132,7 +148,7 @@ export default function ClaraSimples() {
               borderLeft: '4px solid #ec4899'
             }}>
               <p style={{margin: 0, color: '#374151'}}>
-                💜 Oi, minha linda! Eu sou a Clara, sua companheira virtual. 
+                💜 Oi, minha linda! Eu sou a Ana Lyz, sua companheira virtual. 
                 Estou aqui para te empoderar, te proteger e lutar ao seu lado. 
                 Você nunca está sozinha! Como posso te ajudar hoje?
               </p>
@@ -152,7 +168,7 @@ export default function ClaraSimples() {
                   fontSize: '14px'
                 }}
               >
-                🔊 Testar Fala da Clara
+                🔊 Testar Fala da Ana Lyz
               </button>
 
               <button

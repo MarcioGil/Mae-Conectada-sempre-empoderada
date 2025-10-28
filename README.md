@@ -26,24 +26,22 @@ Leia a versão completa abaixo; várias seções grandes estão dobráveis para 
 
 
 <details>
-<summary><h2>�‍💻 <strong>Sobre o Desenvolvedor</strong> (clique para expandir)</h2></summary>
+<summary><h2>👨‍💻 <strong>Sobre o Desenvolvedor</strong> (clique para expandir)</h2></summary>
 
 <div align="center">
 
-### **Márcio Gil Paiva**
-*Desenvolvedor Full Stack | DIO Campus Expert | Estudante de Engenharia*
+### **Márcio Gil**
+*Embaixador da turma 14 da DIO Campus Expert | Estudante de Engenharia de Software*
 
-🎯 **Missão**: Transformar vidas através da tecnologia inclusiva e acessível  
-💼 **Especialidades**: React, Next.js, TypeScript, IA, PWA, Acessibilidade  
-🌟 **Diferencial**: Apaixonado por tecnologia e justiça social  
+🎯 **Missão:** Transformar vidas através da tecnologia, educação, inovação e justiça social.
+� **Paixão:** Empoderar pessoas, especialmente mães, com soluções digitais acessíveis e acolhedoras.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Márcio%20Gil%20Paiva-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/marcio-gil-paiva)
-[![GitHub](https://img.shields.io/badge/GitHub-@MarcioGil-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarcioGil)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Márcio%20Gil-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/márcio-gil-1b7669309)
+[![Currículo](https://img.shields.io/badge/Currículo-Online-blue?style=for-the-badge&logo=github)](https://marciogil.github.io/curriculum-vitae/)
 [![Email](https://img.shields.io/badge/Email-marciopaivagil@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:marciopaivagil@gmail.com)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-(21)96494--9427-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/5521964949427)
 
-**🎓 Formação**: Engenharia (em andamento) | **🏆 Campus Expert DIO**  
-**💡 Paixão**: Criar soluções que empoderam mulheres e fortalecem famílias
+**Contato direto:** marciopaivagil@gmail.com · (21) 96494-9427
 
 </div>
 

@@ -15,17 +15,7 @@ export const basePath = isGitHubPages ? '/Mae-Conecta' : '';
  * @returns Rota completa para o ambiente atual
  */
 export function createRoute(path: string): string {
-  // Se já tem o basePath, retorna como está
-  if (path.startsWith('/Mae-Conecta')) {
-    return path;
-  }
-  
-  // Adiciona basePath se estiver no GitHub Pages
-  if (typeof window !== 'undefined' && 
-      (window.location.hostname === 'marciogil.github.io' || window.location.href.includes('github.io'))) {
-    return `/Mae-Conecta${path}`;
-  }
-  
+  // Sempre retorna o caminho simples, sem prefixo
   return path;
 }
 

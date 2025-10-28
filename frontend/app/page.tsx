@@ -7,7 +7,7 @@ import ComplianceCard from '../components/ComplianceCard'
 import QuickActions from '../components/QuickActions'
 import { createRoute } from '../utils/routes'
 import WelcomeHero from '../components/WelcomeHero'
-import ClaraSimples from '../components/ClaraSimples'
+import AnaLyzSimples from '../components/AnaLyzSimples'
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
@@ -32,8 +32,8 @@ export default function HomePage() {
       {/* Navegação */}
       <Navigation />
       <WelcomeHero />
-      {/* ClaraSimples: Assistente Virtual */}
-      <ClaraSimples />
+  {/* AnaLyzSimples: Assistente Virtual */}
+  <AnaLyzSimples />
       {/* Seção Principal */}
       <main className="container-mobile md:container-tablet lg:container-desktop py-8">
         <div>

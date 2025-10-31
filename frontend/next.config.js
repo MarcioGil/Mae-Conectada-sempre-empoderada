@@ -23,6 +23,8 @@ const nextConfig = {
   // Configuração dinâmica baseada no ambiente
   ...(process.env.NODE_ENV === 'production' && process.env.GITHUB_PAGES ? {
     output: 'export',
+    basePath: '/Mae-Conectada-sempre-empoderada',
+    assetPrefix: '/Mae-Conectada-sempre-empoderada/',
     trailingSlash: true,
   } : {}),
   images: {

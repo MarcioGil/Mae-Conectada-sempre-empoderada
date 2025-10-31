@@ -15,7 +15,7 @@
 #### **1. PWA BUILDER (GERAR APK) - 15 MINUTOS:**
 ```
 🔗 https://www.pwabuilder.com/
-📝 URL do seu app: https://marciogil.github.io/Mae-Conecta/
+📝 URL do seu app: https://marciogil.github.io/Mae-Conectada-sempre-empoderada/
 ⚙️ Package ID: com.maeconecta.app
 📱 App Name: Mãe Conecta
 ```
@@ -146,7 +146,7 @@ empoderamento feminino, mães brasileiras, assistente virtual, emergência GPS, 
 
 ### **AGORA (15 MINUTOS):**
 1. Abra: https://www.pwabuilder.com/
-2. Cole: `https://marciogil.github.io/Mae-Conecta/`
+2. Cole: `https://marciogil.github.io/Mae-Conectada-sempre-empoderada/`
 3. Clique: "Start" → "Package For Stores" → "Android"
 4. Configure: `com.maeconecta.app`
 5. Download: APK gerado

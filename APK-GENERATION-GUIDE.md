@@ -5,7 +5,7 @@
 ### ✅ **Passos para gerar APK:**
 
 1. **Acesse**: https://www.pwabuilder.com/
-2. **URL**: Cole https://marciogil.github.io/Mae-Conecta/
+2. **URL**: Cole https://marciogil.github.io/Mae-Conectada-sempre-empoderada/
 3. **Gerar**: Clique em "Package For Stores"
 4. **Android**: Escolha "Google Play Store Package"
 5. **Download**: Baixe o APK gerado
@@ -20,7 +20,7 @@
   "startUrl": "/Mae-Conecta/",
   "themeColor": "#d433ff",
   "backgroundColor": "#ffffff",
-  "iconUrl": "https://marciogil.github.io/Mae-Conecta/icons/icon-512x512.png"
+  "iconUrl": "https://marciogil.github.io/Mae-Conectada-sempre-empoderada/icons/icon-512x512.png"
 }
 ```
 

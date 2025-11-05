@@ -1,7 +1,7 @@
 # 🤝 Mãe Conecta - Plataforma de Apoio e Empoderamento
 ### *Rede de proteção digital para mães, com foco na proteção contra violência e criação de comunidades*
 
-[![Deploy Status](https://img.shields.io/badge/Deploy-GitHub%20Pages-brightgreen)](https://marciogil.github.io/Mae-Conecta/)
+[![Deploy Status](https://img.shields.io/badge/Deploy-GitHub%20Pages-brightgreen)](https://marciogil.github.io/Mae-Conectada-sempre-empoderada/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Ready-blueviolet)](https://web.dev/progressive-web-apps/)
 [![Accessibility](https://img.shields.io/badge/A11y-WCAG%202.1%20AA-green)](https://www.w3.org/WAI/WCAG21/quickref/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -10,7 +10,7 @@
 
 ## 🚀 Acesse o aplicativo em produção
 
-👉 **[Clique aqui para acessar o Mãe Conecta em funcionamento](https://marciogil.github.io/Mae-Conecta/)**
+👉 **[Clique aqui para acessar o Mãe Conecta em funcionamento](https://marciogil.github.io/Mae-Conectada-sempre-empoderada/)**
 
 ---
 
@@ -167,13 +167,13 @@ Uma plataforma que **elimina barreiras** e **conecta mães** aos seus direitos, 
 ## 🚀 **DEPLOY E ACESSO**
 
 ### 🌐 **Acesse Agora - Clara em Ação! 👩‍💻**
-**🔗 LINK DIRETO PARA DISTRIBUIÇÃO**: [https://marciogil.github.io/Mae-Conecta/](https://marciogil.github.io/Mae-Conecta/)
+**🔗 LINK DIRETO PARA DISTRIBUIÇÃO**: [https://marciogil.github.io/Mae-Conectada-sempre-empoderada/](https://marciogil.github.io/Mae-Conectada-sempre-empoderada/)
 
 **✨ Para Mulheres**: Clique no link, sem login, sem burocracia! A Clara te ajuda com voz feminina em português 💜
 
 **📱 LINK FÁCIL DE COMPARTILHAR:**
 ```
-https://marciogil.github.io/Mae-Conecta/
+https://marciogil.github.io/Mae-Conectada-sempre-empoderada/
 ```
 
 ### 📱 **Como Instalar no Celular**
@@ -332,7 +332,7 @@ npm run dev
 ## 🔗 **Links e Demos**
 
 ### **🌐 Live Demo**
-- 🚀 **Aplicação**: [https://mae-conecta.vercel.app](https://mae-conecta.vercel.app)
+- 🚀 **Aplicação**: [https://marciogil.github.io/Mae-Conectada-sempre-empoderada/](https://marciogil.github.io/Mae-Conectada-sempre-empoderada/)
 - 📱 **PWA Mobile**: Acesse via celular e "Adicionar à tela inicial"
 - 🎙️ **Voice Demo**: Teste o assistente Clara
 

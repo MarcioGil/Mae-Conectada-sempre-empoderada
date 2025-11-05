@@ -21,12 +21,18 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   // Configuração dinâmica baseada no ambiente
+  // Só usa basePath/assetPrefix se for GitHub Pages
   ...(process.env.NODE_ENV === 'production' && process.env.GITHUB_PAGES ? {
     output: 'export',
     basePath: '/Mae-Conecta',
     assetPrefix: '/Mae-Conecta/',
     trailingSlash: true,
-  } : {}),
+  } : {
+    // Para Vercel/Netlify/mobile, tudo na raiz
+    basePath: '',
+    assetPrefix: '',
+    trailingSlash: false,
+  }),
   images: {
     unoptimized: true,
     domains: ['localhost'],

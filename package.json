@@ -16,23 +16,19 @@
     "dev:backend": "cd backend && npm run dev",
     "dev:all": "concurrently -n \"frontend,backend,ai\" -c \"cyan,green,magenta\" \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:ai\"",
     "dev:ai": "cd ai-services && python main.py",
-    
     "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
     "build:all": "npm run build && npm run build:ai",
     "build:ai": "cd ai-services && pip install -r requirements.txt",
-    
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "start:frontend": "cd frontend && npm run start",
     "start:backend": "cd backend && npm run start",
     "start:production": "npm run build && npm run start",
-    
     "install:all": "npm install && npm run install:frontend && npm run install:backend",
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd backend && npm install",
     "install:ai": "cd ai-services && pip install -r requirements.txt",
-    
     "test": "npm run test:frontend && npm run test:backend",
     "test:frontend": "cd frontend && npm run test",
     "test:backend": "cd backend && npm run test",
@@ -44,61 +40,48 @@
     "test:performance": "cd frontend && npm run lighthouse",
     "test:mobile": "cd frontend && npm run test:mobile",
     "test:watch": "cd frontend && npm run test:watch",
-    
     "lint": "npm run lint:frontend && npm run lint:backend",
     "lint:frontend": "cd frontend && npm run lint",
     "lint:backend": "cd backend && npm run lint",
     "lint:fix": "npm run lint:frontend -- --fix && npm run lint:backend -- --fix",
-    
     "format": "npm run format:frontend && npm run format:backend",
     "format:frontend": "cd frontend && npm run format",
     "format:backend": "cd backend && npm run format",
-    
     "type-check": "npm run type-check:frontend && npm run type-check:backend",
     "type-check:frontend": "cd frontend && npm run type-check",
     "type-check:backend": "cd backend && npm run type-check",
-    
     "analyze": "cd frontend && npm run analyze",
     "lighthouse": "cd frontend && npm run lighthouse",
     "bundle-size": "cd frontend && npm run bundle-size",
-    
     "docker:build": "docker-compose build",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f",
     "docker:clean": "docker-compose down -v --remove-orphans",
-    
     "db:setup": "cd backend && npm run db:setup",
     "db:migrate": "cd backend && npm run db:migrate",
     "db:seed": "cd backend && npm run db:seed",
     "db:reset": "cd backend && npm run db:reset",
     "db:studio": "cd backend && npm run db:studio",
-    
     "setup": "npm run install:all && npm run setup:hooks && npm run setup:env",
     "setup:hooks": "husky install",
     "setup:env": "cp .env.example .env",
     "setup:complete": "npm run setup && npm run db:setup && npm run test:all",
-    
     "deploy": "npm run build:all && npm run test:all && vercel --prod",
     "deploy:staging": "npm run build:all && npm run test:all && vercel",
     "deploy:preview": "vercel",
-    
     "clean": "npm run clean:frontend && npm run clean:backend",
     "clean:frontend": "cd frontend && rm -rf .next node_modules/.cache",
     "clean:backend": "cd backend && rm -rf dist node_modules/.cache",
     "clean:all": "npm run clean && rm -rf node_modules",
-    
     "security:audit": "npm audit && cd frontend && npm audit && cd ../backend && npm audit",
     "security:fix": "npm audit fix && cd frontend && npm audit fix && cd ../backend && npm audit fix",
-    
     "docs:dev": "cd docs && npm run dev",
     "docs:build": "cd docs && npm run build",
     "docs:deploy": "cd docs && npm run deploy",
-    
     "release": "standard-version",
     "release:dry": "standard-version --dry-run",
     "release:alpha": "standard-version --prerelease alpha",
-    
     "monitor": "concurrently \"npm run monitor:frontend\" \"npm run monitor:backend\"",
     "monitor:frontend": "cd frontend && npm run monitor",
     "monitor:backend": "cd backend && npm run monitor"
@@ -135,12 +118,15 @@
   },
   "homepage": "https://maeconecta.com.br",
   "devDependencies": {
+    "@commitlint/cli": "^18.4.4",
+    "@commitlint/config-conventional": "^18.4.4",
+    "@netlify/plugin-nextjs": "^5.14.4",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.19",
     "concurrently": "^8.2.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
-    "standard-version": "^9.5.0",
-    "@commitlint/cli": "^18.4.4",
-    "@commitlint/config-conventional": "^18.4.4"
+    "standard-version": "^9.5.0"
   },
   "engines": {
     "node": ">=18.0.0",

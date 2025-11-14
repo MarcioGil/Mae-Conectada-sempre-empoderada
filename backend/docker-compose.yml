@@ -4,10 +4,8 @@ services:
     build: .
     ports:
       - "4000:4000"
-    environment:
-      - PORT=4000
-      - JWT_SECRET=uma_senha_segura_aqui
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/maeconecta
+    env_file:
+      - ./.env
     depends_on:
       - db
     volumes:

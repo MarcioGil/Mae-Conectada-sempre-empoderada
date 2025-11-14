@@ -1,37 +1,59 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { Pool } = require('pg');
 
-dotenv.config();
-
-const app = express();
-app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+// Listar todas as vagas
+app.get('/vagas', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM vagas ORDER BY criado_em DESC');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao listar vagas.' });
+  }
 });
 
+// Buscar vaga por id
+app.get('/vagas/:id', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM vagas WHERE id = $1', [req.params.id]);
+    if (!result.rows.length) return res.status(404).json({ error: 'Vaga não encontrada.' });
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao buscar vaga.' });
+  }
+});
+
+// Atualizar vaga
+app.put('/vagas/:id', authenticateToken, async (req, res) => {
+  const { titulo, descricao, localidade, remoto, horario } = req.body;
+  try {
+    const result = await pool.query(
+      'UPDATE vagas SET titulo = $1, descricao = $2, localidade = $3, remoto = $4, horario = $5 WHERE id = $6 RETURNING *',
+      [titulo, descricao, localidade, remoto, horario, req.params.id]
+    );
+    if (!result.rows.length) return res.status(404).json({ error: 'Vaga não encontrada.' });
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao atualizar vaga.' });
+  }
+});
+
+// Deletar vaga
+app.delete('/vagas/:id', authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query('DELETE FROM vagas WHERE id = $1 RETURNING *', [req.params.id]);
+    if (!result.rows.length) return res.status(404).json({ error: 'Vaga não encontrada.' });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao deletar vaga.' });
+  }
+});
+dotenv.config();
 // ...existing code...
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { Pool } = require('pg');
-
-dotenv.config();
-
-const app = express();
-app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 
 // Middleware de autenticação JWT
 function authenticateToken(req, res, next) {
@@ -91,6 +113,6 @@ app.get('/perfil', authenticateToken, async (req, res) => {
 });
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor backend rodando na porta ${PORT}`);
 });

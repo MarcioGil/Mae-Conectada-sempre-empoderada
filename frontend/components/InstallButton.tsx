@@ -1,16 +1,13 @@
 'use client';
 
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 
 export default function InstallButton() {
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => { setIsClient(true); }, []);
   const { canInstall, isInstalled, triggerInstall } = useInstallPrompt();
 
-  // Só renderiza no cliente
-  if (!isClient || isInstalled || !canInstall) return null;
+  // Não mostrar se já está instalado
+  if (isInstalled || !canInstall) return null;
 
   return (
     <button
@@ -26,6 +23,7 @@ export default function InstallButton() {
           Instalar App
         </span>
       </div>
+      
       {/* Indicador pulsante */}
       <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
     </button>

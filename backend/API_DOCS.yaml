@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: Mae-Conecta API
+  version: 1.0.0
+  description: >
+    API mínima para autenticação, emergência, documentos, comunidade, vagas e voz.
+servers:
+  - url: http://localhost:4000/api
+paths:
+  /auth/register:
+    post:
+      summary: Registrar novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+              required: [email, password, name]
+      responses:
+        '201':
+          description: Usuário criado
+  /auth/login:
+    post:
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required: [email, password]
+      responses:
+        '200':
+          description: Tokens de acesso
+  /auth/refresh:
+    post:
+      summary: Renovar token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+              required: [refreshToken]
+      responses:
+        '200':
+          description: Novo token de acesso
+  /user/me:
+    get:
+      summary: Perfil do usuário
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dados do usuário
+  /documents:
+    post:
+      summary: Upload de documento
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Documento enviado
+  /documents/{id}:
+    get:
+      summary: Download de documento
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Download do arquivo
+  /emergency/trigger:
+    post:
+      summary: Acionar emergência
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                lat:
+                  type: number
+                lon:
+                  type: number
+                mode:
+                  type: string
+                contacts:
+                  type: array
+                  items:
+                    type: string
+              required: [userId, lat, lon, mode, contacts]
+      responses:
+        '200':
+          description: Emergência acionada
+  /community/rooms/{id}/message:
+    post:
+      summary: Enviar mensagem na comunidade
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+      responses:
+        '201':
+          description: Mensagem enviada
+  /vacancies:
+    get:
+      summary: Listar vagas
+      responses:
+        '200':
+          description: Lista de vagas
+  /voice/command:
+    post:
+      summary: Enviar comando de voz
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Resposta do assistente
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

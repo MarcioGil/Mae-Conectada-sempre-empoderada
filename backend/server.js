@@ -2,11 +2,40 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { Pool } = require('pg');
 
-// Listar todas as vagas
+const app = express();
+
+// Segurança HTTP headers
+app.use(helmet());
+
+// Rate limiting (100 req/15min por IP)
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false
+}));
+
+// CORS restrito (ajuste origin conforme necessário)
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  credentials: true
+}));
+
+// LGPD: cabeçalho de consentimento
+app.use((req, res, next) => {
+  res.setHeader('X-LGPD-Consent', 'true');
+  next();
+});
+
+app.use(express.json());
+
+// ...existing code...
 app.get('/vagas', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM vagas ORDER BY criado_em DESC');
